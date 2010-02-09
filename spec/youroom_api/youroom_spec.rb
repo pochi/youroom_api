@@ -1,5 +1,6 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 require "youroom_api/youroom"
+require "ruby-debug"
 
 describe Youroom::Base do
   describe "#initialize" do
@@ -23,7 +24,7 @@ describe Youroom::Base do
   end
 
   describe "#create_room" do
-    before { @youroom = Youroom::Base.new }
+    before { @youroom = Youroom::Base.new(Youroom::MUIT_URL) }
 
     describe "when args structure is not 'String' or 'Symbol'" do
       before do
@@ -36,16 +37,22 @@ describe Youroom::Base do
         lambda { @youroom.create_room(@ex2) }.should raise_exception(ArgumentError)
       end
     end
+
+    describe "when can create group" do
+      subject { @youroom.create_room("hoge") }
+      # Successfull message
+      its(:msg) { should == "Created" }
+    end
   end
 
   describe "#throw_request" do
     describe "when method is create_room" do
       before do
-        @youroom = Youroom::Base.new(Youroom::BASE_URL)
+        @youroom = Youroom::Base.new(Youroom::MUIT_URL)
       end
 
       it do
-        @youroom.create_room("hoge").should_not be_nil
+        @youroom.send(:throw_request, "create_room", {:name=>"name"}).should_not be_nil
       end
     end
   end
@@ -53,7 +60,7 @@ describe Youroom::Base do
   describe "#request_path" do
     describe "when method is 'create_room'" do
       before do
-        @youroom = Youroom::Base.new(Youroom::BASE_URL)
+        @youroom = Youroom::Base.new(Youroom::MUIT_URL)
       end
 
       subject { @youroom.send(:request_path, 'create_room') }

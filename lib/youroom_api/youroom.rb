@@ -4,7 +4,7 @@ require 'net/http'
 
 module Youroom
   # you need override here
-  BASE_URL = "http://172.31.235.77:8081/youroom/"
+  MUIT_URL = "http://172.31.235.77:8081/youroom/"
 
   class Base
     attr_accessor :host, :port, :path, :header
