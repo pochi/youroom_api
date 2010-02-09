@@ -1,14 +1,14 @@
 = youroom_api
 
-* FIX (url)
+* http://sufg1ed2v/rubyforge/youroom_api
 
 == DESCRIPTION:
 
-FIX (describe your package)
+simple api
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+* youroom client (list of features or problems)
 
 == SYNOPSIS:
 

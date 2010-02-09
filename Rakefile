@@ -1,12 +1,12 @@
+# -*- coding: utf-8 -*-
 # -*- ruby -*-
 
 require 'rubygems'
 require 'hoe'
 
 Hoe.spec 'youroom_api' do
-  # developer('FIX', 'FIX@example.com')
+  developer('rubypochi', 'yuuichi_2_kuroda@mufg.jp')
 
-  # self.rubyforge_name = 'youroom_apix' # if different than 'youroom_api'
+  self.rubyforge_name = 'youroom_api' # if different than 'youroom_api'
 end
 
-# vim: syntax=ruby
