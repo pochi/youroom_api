@@ -4,7 +4,8 @@ require 'net/http'
 
 module Youroom
   # you need override here
-  MUIT_URL = "http://172.31.235.77:8081/youroom/"
+  MUIT_DEV_URL = "http://172.31.235.77:8081/youroom/"
+  MUIT_URL = "http://172.31.251.173:8081/youroom/"
 
   class Base
     attr_accessor :host, :port, :path, :header
@@ -22,6 +23,15 @@ module Youroom
       end
     end
 
+    # user -> redmine user object
+    def create_user(user)
+      if required_structure(user, User)
+        throw_request(current_method, {:name => user.name, :email => user.mail, :bpr => user.bpr})
+      else
+        raise ArgumentError
+      end
+    end
+
     private
     def parse(url)
       uri = URI.parse(url)
@@ -34,9 +44,9 @@ module Youroom
 
     def throw_request(method, params)
       begin
-        return Net::HTTP.start(@host, @port) do |http|
-                 http.post(request_path(method), request_params(params), @header)
-               end
+        Net::HTTP.start(@host, @port) do |http|
+          http.post(request_path(method), request_params(params), @header)
+        end
       rescue => e
         return e
       end
@@ -45,6 +55,7 @@ module Youroom
     def request_path(method)
       case method
         when 'create_room'; File.join(@path, 'redmine', 'room_create')
+        when 'create_user'; File.join(@path, 'redmine', 'user_create')
       end
     end
 
