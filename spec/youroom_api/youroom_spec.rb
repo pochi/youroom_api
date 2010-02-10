@@ -113,4 +113,20 @@ describe Youroom::Base do
       end
     end
   end
+
+  describe "#create_participation" do
+    before { @youroom = Youroom::Base.new(Youroom::MUIT_DEV_URL) }
+
+    describe "when can crate participation" do
+      # this test is increase youroom participation.
+      # if you try again, test will fail because participation has taken by before test
+      before do
+        @redmine_project = Project.new(1)
+        @redmine_user = User.new("pochi", "test_pochi@gmail.com", "pit01205")
+      end
+
+      subject { @youroom.create_participation(@redmine_project, @redmine_user) }
+      its(:msg) { should == "Created" }
+    end
+  end
 end

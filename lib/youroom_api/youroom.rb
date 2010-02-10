@@ -32,6 +32,16 @@ module Youroom
       end
     end
 
+    # projct -> redmine project object
+    # user -> redmine user object
+    def create_participation(project, user)
+      if required_structure(project, Project) and required_structure(user, User)
+        throw_request(current_method, {:room_id => project.room_id.to_s, :bpr => user.bpr} )
+      else
+        raise ArgumentError
+      end
+    end
+
     private
     def parse(url)
       uri = URI.parse(url)
@@ -56,6 +66,7 @@ module Youroom
       case method
         when 'create_room'; File.join(@path, 'redmine', 'room_create')
         when 'create_user'; File.join(@path, 'redmine', 'user_create')
+        when 'create_participation'; File.join(@path, 'redmine', 'participation_create')
       end
     end
 
