@@ -114,19 +114,45 @@ describe Youroom::Base do
     end
   end
 
-  describe "#create_participation" do
-    before { @youroom = Youroom::Base.new(Youroom::MUIT_DEV_URL) }
 
-    describe "when can crate participation" do
-      # this test is increase youroom participation.
-      # if you try again, test will fail because participation has taken by before test
-      before do
-        @redmine_project = Project.new(1)
-        @redmine_user = User.new("pochi", "test_pochi@gmail.com", "pit01205")
+  describe "Participation" do
+    # this test is increase youroom participation.
+    # if you try again, test will fail because participation has taken by before test
+    before do
+      @youroom = Youroom::Base.new(Youroom::MUIT_DEV_URL)
+      @redmine_project = Project.new(1)
+      @redmine_user = User.new("pochi", "test_pochi@gmail.com", "pit01205")
+      @user_only_exists_redmine = User.new("alice", "test_alice@gmail.com", "no_exists_user")
+    end
+
+    describe "#create_participation" do
+      describe "when can crate participation" do
+        subject { @youroom.create_participation(@redmine_project, @redmine_user) }
+        its(:msg) { should == "Created" }
       end
 
-      subject { @youroom.create_participation(@redmine_project, @redmine_user) }
-      its(:msg) { should == "Created" }
+      describe "when can't create participation" do
+        it do
+          lambda do
+            @youroom.create_participation("hoge", @redmine_user)
+          end.should raise_exception(ArgumentError)
+        end
+      end
+    end
+
+    describe "#destroy_paticipation" do
+      describe "when can crate participation" do
+        subject { @youroom.destroy_participation(@redmine_project, @redmine_user) }
+        its(:msg) { should == "OK" }
+      end
+
+      describe "when can't create participation" do
+        it do
+          lambda do
+            @youroom.create_participation("hoge", @redmine_user)
+          end.should raise_exception(ArgumentError)
+        end
+      end
     end
   end
 end
