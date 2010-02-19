@@ -1,6 +1,7 @@
 require 'object_extention'
 require 'uri'
 require 'net/http'
+require File.expand_path(File.dirname(__FILE__)+"/youroom_oauth.rb")
 
 module Youroom
   # you need override here
@@ -8,9 +9,10 @@ module Youroom
   MUIT_URL = "http://172.31.251.173:8081/youroom/"
 
   class Base
-    attr_accessor :host, :port, :path, :header
+    attr_accessor :url, :host, :port, :path, :header
 
     def initialize(url="http://youroom.in/")
+      @url = url
       parse(url)
       @header = ""
     end
@@ -82,6 +84,10 @@ module Youroom
     def request_params(params)
       params.inject("") {|res, ary| res += ary.first.to_s + "=" + ary.last + "&" }.chop
     end
+  end
+
+  Base.class_eval do
+    include OAuth
   end
 end
 

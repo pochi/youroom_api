@@ -1,6 +1,5 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 require "youroom_api/youroom"
-require "ruby-debug"
 
 describe Youroom::Base do
   describe "#initialize" do
@@ -8,6 +7,7 @@ describe Youroom::Base do
       subject { Youroom::Base.new }
 
       it { should be_a(Youroom::Base) }
+      its(:url) { should == "http://youroom.in/" }
       its(:host) { should == "youroom.in" }
       its(:port) { should == 80 }
       its(:path) { should == "/"}
@@ -17,6 +17,7 @@ describe Youroom::Base do
       subject { Youroom::Base.new("http://sufg1ed2v/youroom/") }
 
       it { should be_a(Youroom::Base) }
+      its(:url) { should == "http://sufg1ed2v/youroom/" }
       its(:host) { should == "sufg1ed2v" }
       its(:port) { should == 80 }
       its(:path) { should == "/youroom/"}
@@ -156,3 +157,4 @@ describe Youroom::Base do
     end
   end
 end
+
