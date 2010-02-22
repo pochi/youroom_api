@@ -69,8 +69,50 @@ describe Youroom::Connection do
     before do
       @user = OAuthUser.new("hoge", "hoge", "hoge", "hoge")
       @consumer = @youroom.send(:create_consumer, @user)
+      @response = @youroom.send(:create_access_token, @consumer, @user)
     end
-    subject { @youroom.send(:create_access_token, @consumer, @user) }
-    it { should be_a(OAuth::AccessToken) }
+
+    it { @response.should be_a(OAuth::AccessToken) }
+    it "@youroom.oauth is existed" do
+      @youroom.oauth.should_not be_nil
+    end
   end
+
+  describe "#get_entries" do
+    before do
+      @user = OAuthUser.new(*user_sample)
+      # Group_id must 4.(you can config room_id which can access group_id of youroom)
+      @project = Project.new(4)
+    end
+
+    subject { @youroom.get_entries(@project, @user) }
+    it { should be_a(Net::HTTPOK) }
+  end
+
+  describe "#throw_oauth_request" do
+    before do
+      @user = OAuthUser.new(*user_sample)
+      # Group_id must 4.(you can config room_id which can access group_id of youroom)
+      @project = Project.new(4)
+      @consumer = @youroom.send(:create_consumer, @user)
+      @youroom.send(:create_access_token, @consumer, @user)
+    end
+
+    subject { @youroom.send(:throw_oauth_request, @project, "get_entries") }
+    it { should be_a(Net::HTTPOK) }
+  end
+
+  describe "#optimize_request" do
+    subject { @youroom.send(:optimize_request, "get_entries", "4")}
+    it { should be_an(Array)}
+    its(:first) { should == "get" }
+    its(:last) { should == "group/r4/entries.json" }
+  end
+end
+
+
+# this method make can access youroom.
+# but this way is not useful. please unplesure this methods test
+def user_sample
+  %w[lpAxNguShekxmosjlh3i nNsDDRUZbBwTJvKanrlox3KGnLCBhCWIpiDvnkz0 mIlSR3dSHu9CVQaFdfm3 IeEn03M0eumgRmoyzeklhJXIRkcbCdicem4TNKVA]
 end
