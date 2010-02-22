@@ -9,7 +9,7 @@ end
 class Project
   attr_accessor :room_id
 
-  def initialize(id)
+  def initialize(id=nil)
     @room_id = id
   end
 end
