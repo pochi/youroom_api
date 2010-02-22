@@ -2,7 +2,7 @@ require File.expand_path("../spec_helper", File.dirname(__FILE__))
 require "youroom_api/youroom"
 require "youroom_api/youroom_oauth"
 
-describe Youroom::OAuth do
+describe Youroom::Connection do
   before { @youroom = Youroom::Base.new(Youroom::MUIT_DEV_URL) }
 
   describe "#oauth_conditions" do
@@ -55,5 +55,22 @@ describe Youroom::OAuth do
         it { should be_false }
       end
     end
+  end
+
+  describe "#create_consumer" do
+    before do
+      @user = OAuthUser.new("hoge", "hoge", "hoge", "hoge")
+    end
+    subject { @youroom.send(:create_consumer, @user) }
+    it { should be_a(OAuth::Consumer) }
+  end
+
+  describe "#create_access_token" do
+    before do
+      @user = OAuthUser.new("hoge", "hoge", "hoge", "hoge")
+      @consumer = @youroom.send(:create_consumer, @user)
+    end
+    subject { @youroom.send(:create_access_token, @consumer, @user) }
+    it { should be_a(OAuth::AccessToken) }
   end
 end

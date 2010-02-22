@@ -87,7 +87,7 @@ module Youroom
   end
 
   Base.class_eval do
-    include OAuth
+    include Connection
   end
 end
 
