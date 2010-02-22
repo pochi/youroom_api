@@ -6,6 +6,7 @@ Rakefile
 lib/youroom_api.rb
 lib//object_extention.rb
 lib/youroom_api/youroom.rb
+lib/youroom_api/youroom_oauth.rb
 spec/setup_test_model.rb
 spec/spec_helper.rb
 spec/youroom_api/youroom_spec.rb
