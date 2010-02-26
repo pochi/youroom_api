@@ -108,6 +108,18 @@ describe Youroom::Connection do
     its(:first) { should == "get" }
     its(:last) { should == "group/r4/entries.json" }
   end
+
+  describe "#post_entry" do
+    before do
+      @user = OAuthUser.new(*user_sample)
+      # Group_id must 4.(you can config room_id which can access group_id of youroom)
+      @project = Project.new(4)
+      @content = "test"
+    end
+
+    subject { @youroom.post_entry(@project, @user, {:entry => {:content=>'test'}}) }
+    it { should be_a(Net::HTTPCreated) }
+  end
 end
 
 

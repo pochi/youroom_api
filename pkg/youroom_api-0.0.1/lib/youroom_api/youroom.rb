@@ -82,7 +82,23 @@ module Youroom
     end
 
     def request_params(params)
-      params.inject("") {|res, ary| res += ary.first.to_s + "=" + ary.last + "&" }.chop
+      optimize_params(params).inject("") {|res, ary| res += URI.encode(ary.first.to_s) + "=" + URI.encode(ary.last) + "&" }.chop
+    end
+
+    def optimize_params(params)
+      return_hash = {}
+
+      params.each do |k,v|
+        while v.is_a?(Hash)
+          v.each do |nest_key, nest_val|
+            v = nest_val
+            k = k.to_s + "[" + nest_key.to_s + "]"
+          end
+        end
+        return_hash.store(k.to_s,v.to_s)
+      end
+
+      return_hash
     end
   end
 

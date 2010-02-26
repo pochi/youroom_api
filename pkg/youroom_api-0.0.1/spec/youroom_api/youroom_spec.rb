@@ -90,6 +90,35 @@ describe Youroom::Base do
       subject { @youroom.send(:request_params, {:name=> "hoge" }) }
       it { should == "name=hoge"}
     end
+
+    describe "when params is nest" do
+      before do
+        @youroom = Youroom::Base.new("http://sufg1ed2v/youroom/")
+      end
+
+      subject { @youroom.send(:request_params, {:name=> {:first=>"hoge"}}) }
+      it { should == "name[first]=hoge"}
+    end
+  end
+
+  describe "#optimize_params" do
+    describe "case1: no nest hash" do
+      before do
+        @youroom = Youroom::Base.new("http://sufg1ed2v/youroom/")
+      end
+
+      subject { @youroom.send(:optimize_params, {:a=> "b" }) }
+      it { should == {"a"=>"b"}}
+    end
+
+    describe "case2: nested hash" do
+      before do
+        @youroom = Youroom::Base.new("http://sufg1ed2v/youroom/")
+      end
+
+      subject { @youroom.send(:optimize_params, {:a=> "b", :b => {:c=>3} }) }
+      it { should == {"a"=>"b", "b[c]"=>"3"}}
+    end
   end
 
   describe "#create_user" do

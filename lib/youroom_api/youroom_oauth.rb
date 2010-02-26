@@ -2,26 +2,42 @@ require "rubygems"
 require "oauth"
 
 module Youroom
-
   module Connection
     attr_accessor :oauth
+
     def get_entries(project, user)
-      return nil if !check_user(user) or check_project(project)
+      return nil if !check_user(user) or !check_project(project)
       consumer = create_consumer(user)
       # this method set @oauth OAuth::AccessToken Object
       create_access_token(consumer, user)
-      throw_oauth_request(project, current_method)
+      throw_oauth_request(project, current_method, nil)
+    end
+
+    def post_entry(project, user, content)
+      return nil if !check_user(user) or !check_project(project)
+      consumer = create_consumer(user)
+      # this method set @oauth OAuth::AccessToken Object
+      create_access_token(consumer, user)
+      throw_oauth_request(project, current_method, content)
     end
 
     private
-    def throw_oauth_request project, current_method
+    def throw_oauth_request project, current_method, params=nil
       method, path = optimize_request(current_method, project.room_id)
-      @oauth.instance_eval("#{method}(%q[#{@url+path}])")
+      unless params
+        @oauth.instance_eval("#{method}(%q[#{@url+path}])")
+      else
+        @oauth.instance_eval("#{method}(%q[#{@url+path}], #{optimize_params(params).inspect})")
+      end
     end
 
+
+    # TODO: youroom can room_id free.
+    #       If so, this optimizer fail make request
     def optimize_request current_method, room_id
       case current_method
         when "get_entries"; ["get", "group/r#{room_id}/entries.json"]
+        when "post_entry"; ["post", "group/r#{room_id}/entries.json"]
       end
     end
 
