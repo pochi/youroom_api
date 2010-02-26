@@ -114,10 +114,22 @@ describe Youroom::Connection do
       @user = OAuthUser.new(*user_sample)
       # Group_id must 4.(you can config room_id which can access group_id of youroom)
       @project = Project.new(4)
-      @content = "test"
     end
 
     subject { @youroom.post_entry(@project, @user, {:entry => {:content=>'test'}}) }
+    it { should be_a(Net::HTTPCreated) }
+  end
+
+  describe "#post_comment" do
+    before do
+      @user = OAuthUser.new(*user_sample)
+      # Group_id must 4.(you can config room_id which can access group_id of youroom)
+      @project = Project.new(4)
+      # entry_id 35 is random number in exists entry
+      @entry = Entry.new(51)
+    end
+
+    subject { @youroom.post_comment(@project, @user, @entry, {:entry => {:content=> "hogehoge"}}) }
     it { should be_a(Net::HTTPCreated) }
   end
 end

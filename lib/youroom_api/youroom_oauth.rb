@@ -6,22 +6,30 @@ module Youroom
     attr_accessor :oauth
 
     def get_entries(project, user)
-      return nil if !check_user(user) or !check_project(project)
-      consumer = create_consumer(user)
-      # this method set @oauth OAuth::AccessToken Object
-      create_access_token(consumer, user)
+      prepare_access_consumer(user, project)
       throw_oauth_request(project, current_method, nil)
     end
 
     def post_entry(project, user, content)
-      return nil if !check_user(user) or !check_project(project)
-      consumer = create_consumer(user)
-      # this method set @oauth OAuth::AccessToken Object
-      create_access_token(consumer, user)
+      prepare_access_consumer(user, project)
+      throw_oauth_request(project, current_method, content)
+    end
+
+    def post_comment(project, user, entry, content)
+      prepare_access_consumer(user, project)
+      content[:entry].store(:parent_id, entry.id)
       throw_oauth_request(project, current_method, content)
     end
 
     private
+    # no test here
+    def prepare_access_consumer(user, project)
+      return nil if !check_user(user) or !check_project(project)
+      consumer = create_consumer(user)
+      # this method set @oauth OAuth::AccessToken Object
+      create_access_token(consumer, user)
+    end
+
     def throw_oauth_request project, current_method, params=nil
       method, path = optimize_request(current_method, project.room_id)
       unless params
@@ -38,6 +46,7 @@ module Youroom
       case current_method
         when "get_entries"; ["get", "group/r#{room_id}/entries.json"]
         when "post_entry"; ["post", "group/r#{room_id}/entries.json"]
+        when "post_comment"; ["post", "group/r#{room_id}/entries.json"]
       end
     end
 

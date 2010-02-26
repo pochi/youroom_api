@@ -24,3 +24,11 @@ class OAuthUser
     @access_token_secret = access_token_secret
   end
 end
+
+class Entry
+  attr_accessor :id
+
+  def initialize(id)
+    @id = id
+  end
+end

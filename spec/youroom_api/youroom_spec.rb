@@ -99,6 +99,15 @@ describe Youroom::Base do
       subject { @youroom.send(:request_params, {:name=> {:first=>"hoge"}}) }
       it { should == "name[first]=hoge"}
     end
+
+    describe "when params is nest and has many elements" do
+      before do
+        @youroom = Youroom::Base.new("http://sufg1ed2v/youroom/")
+      end
+
+      subject { @youroom.send(:request_params, {:name=> {:first=>"hoge", :second=>"kuro"}}) }
+      it { should == "name[first]=hoge&name[second]=kuro"}
+    end
   end
 
   describe "#optimize_params" do
@@ -118,6 +127,15 @@ describe Youroom::Base do
 
       subject { @youroom.send(:optimize_params, {:a=> "b", :b => {:c=>3} }) }
       it { should == {"a"=>"b", "b[c]"=>"3"}}
+    end
+
+    describe "case3: nested hash and has many elements in hash" do
+      before do
+        @youroom = Youroom::Base.new("http://sufg1ed2v/youroom/")
+      end
+
+      subject { @youroom.send(:optimize_params, {:a=> "b", :b => {:c=>3, :d=>4} }) }
+      it { should == {"a"=>"b", "b[c]"=>"3", "b[d]"=>"4"}}
     end
   end
 

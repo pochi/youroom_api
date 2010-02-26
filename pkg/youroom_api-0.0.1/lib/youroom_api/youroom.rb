@@ -89,13 +89,14 @@ module Youroom
       return_hash = {}
 
       params.each do |k,v|
+        return_hash.store(k.to_s,v.to_s) unless v.is_a?(Hash)
         while v.is_a?(Hash)
           v.each do |nest_key, nest_val|
             v = nest_val
-            k = k.to_s + "[" + nest_key.to_s + "]"
+            store_k = k.to_s + "[" + nest_key.to_s + "]"
+            return_hash.store(store_k,v.to_s)
           end
         end
-        return_hash.store(k.to_s,v.to_s)
       end
 
       return_hash
