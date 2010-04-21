@@ -25,6 +25,32 @@ describe Youroom::Base do
     end
   end
 
+  describe "#ww" do
+    it "should be server is start" do
+      expect {
+        TCPSocket.open('localhost', '8083').close
+      }.should_not == raise_exception(Errno::ECONNREFUSED)
+    end
+  end
+
+  describe "#create_room_with_ww" do
+    before do
+      @youroom = Youroom::Base.new("http://localhost:8083/youroom")
+      WW::Server.mock(:youroom).post("/youroom/redmine/group/create") do
+        ""
+      end
+    end
+
+    after do
+      WW::Server.verify(:youroom)
+    end
+
+    it "should receive request" do
+      @youroom.create_room("hoge")
+    end
+
+  end
+
   # this method return Net::HTTP object
   # you can access response follow "res.body"
   describe "#create_room" do
