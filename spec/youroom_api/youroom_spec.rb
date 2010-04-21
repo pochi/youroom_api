@@ -2,6 +2,7 @@ require File.expand_path("../spec_helper", File.dirname(__FILE__))
 require "youroom_api/youroom"
 
 describe Youroom::Base do
+
   describe "#initialize" do
     describe "without url" do
       subject { Youroom::Base.new }
@@ -37,12 +38,16 @@ describe Youroom::Base do
 
       it do
         lambda { @youroom.create_room(@ex1) }.should raise_exception(ArgumentError)
+      end
+
+      it do
         lambda { @youroom.create_room(@ex2) }.should raise_exception(ArgumentError)
       end
     end
 
     describe "when can create group" do
       subject { @youroom.create_room("hoge") }
+      # TODO: I want to use "ww"
       # Successfull message(Response from youroom)
       its(:msg) { should == "Created" }
     end
@@ -67,7 +72,7 @@ describe Youroom::Base do
       end
 
       subject { @youroom.send(:request_path, 'create_room') }
-      it { should == "/youroom/redmine/room_create" }
+      it { should == "/youroom/redmine/group/create" }
     end
 
     describe "when method is 'create_user'" do
@@ -76,7 +81,7 @@ describe Youroom::Base do
       end
 
       subject { @youroom.send(:request_path, 'create_user') }
-      it { should == "/youroom/redmine/user_create" }
+      it { should == "/youroom/redmine/user/create" }
     end
 
   end
@@ -106,7 +111,7 @@ describe Youroom::Base do
       end
 
       subject { @youroom.send(:request_params, {:name=> {:first=>"hoge", :second=>"kuro"}}) }
-      it { should == "name[first]=hoge&name[second]=kuro"}
+      it { should == "name[second]=kuro&name[first]=hoge"}
     end
   end
 

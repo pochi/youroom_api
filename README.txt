@@ -16,7 +16,7 @@ simple api
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+* When test: rspec 1.3.0 or later
 
 == INSTALL:
 

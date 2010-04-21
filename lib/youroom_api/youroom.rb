@@ -74,10 +74,10 @@ module Youroom
 
     def request_path(method)
       case method
-        when 'create_room'; File.join(@path, 'redmine', 'room_create')
-        when 'create_user'; File.join(@path, 'redmine', 'user_create')
-        when 'create_participation'; File.join(@path, 'redmine', 'participation_create')
-        when 'destroy_participation'; File.join(@path, 'redmine', 'participation_destroy')
+        when 'create_room'; File.join(@path, 'redmine', 'group', 'create')
+        when 'create_user'; File.join(@path, 'redmine', 'user', 'create')
+        when 'create_participation'; File.join(@path, 'redmine', 'participation', 'create')
+        when 'destroy_participation'; File.join(@path, 'redmine', 'participation', 'destroy')
       end
     end
 
