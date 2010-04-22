@@ -3,6 +3,8 @@ require 'rubygems'
 require 'spec'
 require 'ww'
 require 'json'
+require 'youroom_api/youroom'
+require 'youroom_api/youroom_oauth'
 
 $LOAD_PATH << File.expand_path("..", File.dirname(__FILE__))
 $LOAD_PATH << File.expand_path("../lib", File.dirname(__FILE__))

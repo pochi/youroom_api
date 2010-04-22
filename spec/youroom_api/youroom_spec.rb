@@ -1,5 +1,4 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
-require "youroom_api/youroom"
 
 describe Youroom::Base do
 
@@ -118,27 +117,6 @@ describe Youroom::Base do
 
   end
 
-  describe "#request_params" do
-    before do
-      @youroom = Youroom::Base.new(WW_URL)
-    end
-
-    describe "when method is 'create_room'" do
-      subject { @youroom.send(:request_params, {:name=> "hoge"}) }
-      it { should == "name=hoge"}
-    end
-
-    describe "when params is nest" do
-      subject { @youroom.send(:request_params, {:name=> {:first=>"hoge"}}) }
-      it { should == "name[first]=hoge"}
-    end
-
-    describe "when params is nest and has many elements" do
-      subject { @youroom.send(:request_params, {:name=> {:first=>"hoge", :second=>"kuro"}}) }
-      it { should == "name[second]=kuro&name[first]=hoge"}
-    end
-  end
-
   describe "#optimize_params" do
     before do
       @youroom = Youroom::Base.new(WW_URL)
@@ -252,6 +230,7 @@ describe Youroom::Base do
         end
       end
     end
+
   end
 end
 

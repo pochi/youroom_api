@@ -64,8 +64,11 @@ module Youroom
 
     def throw_request(method, params)
       begin
+        req = Net::HTTP::Post.new(request_path(method))
+        req.set_form_data(optimize_params(params))
+
         Net::HTTP.start(@host, @port) do |http|
-          http.post(request_path(method), request_params(params), @header)
+          http.request(req)
         end
       rescue => e
         return e
@@ -79,10 +82,6 @@ module Youroom
         when 'create_participation'; File.join(@path, 'redmine', 'participation', 'create')
         when 'destroy_participation'; File.join(@path, 'redmine', 'participation', 'destroy')
       end
-    end
-
-    def request_params(params)
-      optimize_params(params).inject("") {|res, ary| res += URI.encode(ary.first.to_s) + "=" + URI.encode(ary.last) + "&" }.chop
     end
 
     def optimize_params(params)
