@@ -1,6 +1,4 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
-require "youroom_api/youroom"
-require "youroom_api/youroom_oauth"
 
 describe Youroom::Connection do
   before { @youroom = Youroom::Base.new(Youroom::MUIT_DEV_URL) }
