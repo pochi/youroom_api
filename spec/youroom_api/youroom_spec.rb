@@ -33,30 +33,10 @@ describe Youroom::Base do
     end
   end
 
-  describe "#create_room_with_ww" do
-    before do
-      @youroom = Youroom::Base.new("http://localhost:8083/youroom")
-      WW::Server.mock(:youroom).post("/youroom/redmine/group/create") do
-        ""
-      end
-    end
-
-    after do
-      WW::Server.verify(:youroom)
-    end
-
-    it "should receive request" do
-      @youroom.create_room("hoge")
-    end
-
-  end
-
-  # this method return Net::HTTP object
-  # you can access response follow "res.body"
   describe "#create_room" do
-    before { @youroom = Youroom::Base.new(Youroom::MUIT_DEV_URL) }
+    before { @youroom = Youroom::Base.new(WW_URL) }
 
-    describe "when args structure is not 'String' or 'Symbol'" do
+    describe "when before throw request(validation)" do
       before do
         @ex1 = ["hoge", "moge"]
         @ex2 = {:room_name => "moge"}
@@ -71,12 +51,24 @@ describe Youroom::Base do
       end
     end
 
-    describe "when can create group" do
-      subject { @youroom.create_room("hoge") }
-      # TODO: I want to use "ww"
-      # Successfull message(Response from youroom)
-      its(:msg) { should == "Created" }
+    describe "when throw request" do
+      before do
+        WW::Server.mock(:youroom, :name => "hoge").post("/youroom/redmine/group/create") do
+          { :status => "Created" }.to_json
+        end
+
+        @res = @youroom.create_room("hoge")
+      end
+
+      after do
+        WW::Server.verify(:youroom)
+      end
+
+      it "should receive request with {:name=>'hoge'}" do
+        @res.should be_an_instance_of(Net::HTTPOK)
+      end
     end
+
   end
 
   describe "#throw_request" do
