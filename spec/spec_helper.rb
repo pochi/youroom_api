@@ -3,6 +3,7 @@ require 'rubygems'
 require 'spec'
 require 'ww'
 require 'json'
+require 'oauth'
 require 'youroom_api/youroom'
 require 'youroom_api/youroom_oauth'
 

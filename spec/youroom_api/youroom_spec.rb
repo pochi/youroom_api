@@ -2,9 +2,13 @@ require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 describe Youroom::OAuth do
 
+  def access_token
+    @access_token ||= mock(OAuth::AccessToken)
+  end
+
   describe "#initialize" do
     describe "without url" do
-      subject { Youroom::OAuth.new }
+      subject { Youroom::OAuth.new(access_token) }
 
       it { should be_a(Youroom::OAuth) }
       its(:url) { should == "https://home.youroom.in/" }
@@ -12,14 +16,6 @@ describe Youroom::OAuth do
       its(:path) { should == "/"}
     end
 
-    describe "with url" do
-      subject { Youroom::OAuth.new("http://sufg1ed2v/youroom/") }
-
-      it { should be_a(Youroom::OAuth) }
-      its(:url) { should == "http://sufg1ed2v/youroom/" }
-      its(:host) { should == "sufg1ed2v" }
-      its(:path) { should == "/youroom/"}
-    end
   end
 
   describe "#ww" do
@@ -31,7 +27,7 @@ describe Youroom::OAuth do
   end
 
   describe "#create_room" do
-    before { @youroom = Youroom::OAuth.new(WW_URL) }
+    before { @youroom = Youroom::OAuth.new(access_token, WW_URL) }
 
     describe "when before throw request(validation)" do
       before do
@@ -70,7 +66,7 @@ describe Youroom::OAuth do
   describe "#throw_request" do
     describe "when call is successfully" do
       before do
-        @youroom = Youroom::OAuth.new(WW_URL)
+        @youroom = Youroom::OAuth.new(access_token, WW_URL)
         WW::Server.mock(:youroom, :name => "hoge").post("/youroom/redmine/group/create") do
           { :status => "Created" }.to_json
         end
@@ -90,7 +86,7 @@ describe Youroom::OAuth do
 
   describe "#request_path" do
     before do
-      @youroom = Youroom::OAuth.new(WW_URL)
+      @youroom = Youroom::OAuth.new(access_token, WW_URL)
     end
 
     describe "when method is 'create_room'" do
@@ -117,7 +113,7 @@ describe Youroom::OAuth do
 
   describe "#optimize_params" do
     before do
-      @youroom = Youroom::OAuth.new(WW_URL)
+      @youroom = Youroom::OAuth.new(access_token, WW_URL)
     end
 
     describe "case1: no nest hash" do
@@ -137,7 +133,7 @@ describe Youroom::OAuth do
   end
 
   describe "#create_user" do
-    before { @youroom = Youroom::OAuth.new(WW_URL) }
+    before { @youroom = Youroom::OAuth.new(access_token, WW_URL) }
 
     describe "when can create user" do
       before do
@@ -171,7 +167,7 @@ describe Youroom::OAuth do
     # this test is increase youroom participation.
     # if you try again, test will fail because participation has taken by before test
     before do
-      @youroom = Youroom::OAuth.new(WW_URL)
+      @youroom = Youroom::OAuth.new(access_token, WW_URL)
       @redmine_project = Project.new(1)
       @redmine_user = User.new("pochi", "test_pochi@gmail.com", "pit01205")
       @user_only_exists_redmine = User.new("alice", "test_alice@gmail.com", "no_exists_user")
@@ -231,4 +227,5 @@ describe Youroom::OAuth do
 
   end
 end
+
 

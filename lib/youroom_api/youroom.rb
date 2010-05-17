@@ -4,13 +4,14 @@ require 'net/http'
 require File.expand_path(File.dirname(__FILE__)+"/youroom_oauth.rb")
 
 module Youroom
+  BASE_URL = 'https://home.youroom.in/'
 
   class OAuth
     attr_accessor :url, :host, :port, :path, :header
 
-    def initialize(url="https://home.youroom.in/")
+    def initialize(access_token, url='https://home.youroom.in/')
       @url = url
-      parse(url)
+      parse(@url)
       @header = ""
     end
 
