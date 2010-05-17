@@ -4,14 +4,11 @@ require 'net/http'
 require File.expand_path(File.dirname(__FILE__)+"/youroom_oauth.rb")
 
 module Youroom
-  # you need override here
-  MUIT_DEV_URL = "http://172.31.235.77:8081/youroom/"
-  MUIT_URL = "http://172.31.251.173:8081/youroom/"
 
-  class Base
+  class OAuth
     attr_accessor :url, :host, :port, :path, :header
 
-    def initialize(url="http://youroom.in/")
+    def initialize(url="https://home.youroom.in/")
       @url = url
       parse(url)
       @header = ""
@@ -102,9 +99,6 @@ module Youroom
     end
   end
 
-  Base.class_eval do
-    include Connection
-  end
 end
 
 

@@ -1,3 +1,4 @@
+=begin
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 describe Youroom::Connection do
@@ -138,3 +139,4 @@ end
 def user_sample
   %w[lpAxNguShekxmosjlh3i nNsDDRUZbBwTJvKanrlox3KGnLCBhCWIpiDvnkz0 mIlSR3dSHu9CVQaFdfm3 IeEn03M0eumgRmoyzeklhJXIRkcbCdicem4TNKVA]
 end
+=end
