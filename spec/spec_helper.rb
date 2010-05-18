@@ -9,10 +9,10 @@ require 'oauth'
 $LOAD_PATH << File.expand_path("..", File.dirname(__FILE__))
 $LOAD_PATH << File.expand_path("../lib/youroom_api", File.dirname(__FILE__))
 
-require 'youroom'
-require 'request'
-require 'room'
-require 'user'
+Dir[File.join(File.expand_path("..", File.dirname(__FILE__)), "lib", "youroom_api", "*")].each do |file|
+  require file
+end
+
 
 load File.expand_path("setup_test_model.rb", File.dirname(__FILE__))
 

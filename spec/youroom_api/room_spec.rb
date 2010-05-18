@@ -47,13 +47,6 @@ describe Youroom::CreateRoom do
     end
   end
 
-  describe "#request" do
-    before do
-      @room = Youroom::CreateRoom.new("hoge", WW_URL)
-    end
-    subject { @room.request }
-    it { should be_a(Net::HTTP::Post) }
-  end
 
   describe "#params" do
     before do

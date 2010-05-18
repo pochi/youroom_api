@@ -14,15 +14,17 @@ describe Youroom::OAuth do
     @create_user ||= mock(Youroom::CreateUser)
   end
 
-  describe "#initialize" do
-    describe "without url" do
-      subject { Youroom::OAuth.new(access_token) }
+  def create_participation
+    @create_participation ||= mock(Youroom::CreateParticipation)
+  end
 
-      it { should be_a(Youroom::OAuth) }
-      its(:url) { should == "https://home.youroom.in/" }
-      its(:host) { should == "home.youroom.in" }
-      its(:path) { should == "/"}
-    end
+  describe "#initialize" do
+    subject { Youroom::OAuth.new(access_token) }
+
+    it { should be_a(Youroom::OAuth) }
+    its(:url) { should == "https://home.youroom.in/" }
+    its(:host) { should == "home.youroom.in" }
+    its(:path) { should == "/"}
 
   end
 
@@ -105,28 +107,10 @@ describe Youroom::OAuth do
     end
 
     describe "#create_participation" do
-      describe "when can crate participation" do
-        before do
-          WW::Server.mock(:youroom, :room_id => @redmine_project.room_id.to_s, :bpr => @redmine_user.login).
-                     post("/youroom/redmine/participation/create") do
-            { :status => "Created" }.to_json
-          end
-        end
-
-        after do
-          WW::Server.verify(:youroom)
-        end
-
-        subject { @client.create_participation(@redmine_project, @redmine_user) }
-        it { should be_a_instance_of(Net::HTTPOK) }
-      end
-
-      describe "when can't create participation" do
-        it do
-          lambda do
-            @client.create_participation("hoge", @redmine_user)
-          end.should raise_exception(ArgumentError)
-        end
+      it "should receive CreateParticipation.new and call" do
+        Youroom::CreateParticipation.should_receive(:new).and_return(create_participation)
+        create_participation.should_receive(:call)
+        @client.create_participation("room_id", "test_pochi@gmail.com")
       end
     end
 

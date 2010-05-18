@@ -19,20 +19,14 @@ module Youroom
       request.call
     end
 
-    # user -> redmine user object
     def create_user(name, email, bpr=nil)
       @request = CreateUser.new(name, email, bpr, url)
       request.call
     end
 
-    # projct -> redmine project object
-    # user -> redmine user object
-    def create_participation(project, user)
-      if required_structure(project, Project) and required_structure(user, User)
-        throw_request(current_method, {:room_id => project.room_id.to_s, :bpr => user.login} )
-      else
-        raise ArgumentError
-      end
+    def create_participation(room_id, email)
+      @request = CreateParticipation.new(room_id, email, url)
+      request.call
     end
 
     def destroy_participation(project, user)
