@@ -64,13 +64,8 @@ describe Youroom::OAuth do
   end
 
   describe "Participation" do
-    # this test is increase youroom participation.
-    # if you try again, test will fail because participation has taken by before test
     before do
       @client = Youroom::OAuth.new(access_token, WW_URL)
-      @redmine_project = Project.new(1)
-      @redmine_user = User.new("pochi", "test_pochi@gmail.com", "pit01205")
-      @user_only_exists_redmine = User.new("alice", "test_alice@gmail.com", "no_exists_user")
     end
 
     describe "#create_participation" do

@@ -11,6 +11,7 @@ $LOAD_PATH << File.expand_path("../lib/youroom_api", File.dirname(__FILE__))
 
 
 require "request"
+require "participation"
 Dir[File.join(File.expand_path("..", File.dirname(__FILE__)), "lib", "youroom_api", "*")].each do |file|
   require file
 end
