@@ -1,13 +1,12 @@
 require 'object_extention'
 require 'uri'
 require 'net/http'
-require File.expand_path(File.dirname(__FILE__)+"/youroom_oauth.rb")
 
 module Youroom
   BASE_URL = 'https://home.youroom.in/'
 
   class OAuth
-    attr_accessor :url, :host, :port, :path, :header
+    attr_accessor :url, :host, :port, :path, :header, :request
 
     def initialize(access_token, url='https://home.youroom.in/')
       @url = url
@@ -16,11 +15,8 @@ module Youroom
     end
 
     def create_room(name)
-      if required_structure(name, String, Symbol)
-        throw_request(current_method, {:name => name.to_s} )
-      else
-        raise ArgumentError
-      end
+      @request = CreateRoom.new(name, url)
+      request.call
     end
 
     # user -> redmine user object
@@ -75,7 +71,6 @@ module Youroom
 
     def request_path(method)
       case method
-        when 'create_room'; File.join(@path, 'redmine', 'group', 'create')
         when 'create_user'; File.join(@path, 'redmine', 'user', 'create')
         when 'create_participation'; File.join(@path, 'redmine', 'participation', 'create')
         when 'destroy_participation'; File.join(@path, 'redmine', 'participation', 'destroy')

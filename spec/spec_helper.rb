@@ -4,11 +4,14 @@ require 'spec'
 require 'ww'
 require 'json'
 require 'oauth'
-require 'youroom_api/youroom'
-require 'youroom_api/youroom_oauth'
+
 
 $LOAD_PATH << File.expand_path("..", File.dirname(__FILE__))
-$LOAD_PATH << File.expand_path("../lib", File.dirname(__FILE__))
+$LOAD_PATH << File.expand_path("../lib/youroom_api", File.dirname(__FILE__))
+
+require 'youroom'
+require 'request'
+require 'room'
 
 load File.expand_path("setup_test_model.rb", File.dirname(__FILE__))
 
