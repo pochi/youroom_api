@@ -18,6 +18,10 @@ describe Youroom::OAuth do
     @create_participation ||= mock(Youroom::CreateParticipation)
   end
 
+  def destroy_participation
+    @destroy_participation ||= mock(Youroom::DestroyParticipation)
+  end
+
   describe "#initialize" do
     subject { Youroom::OAuth.new(access_token) }
 
@@ -48,43 +52,6 @@ describe Youroom::OAuth do
     end
   end
 
-  describe "#request_path" do
-    before do
-      @client = Youroom::OAuth.new(access_token, WW_URL)
-    end
-
-    describe "when method is 'create_participation'" do
-      subject { @client.send(:request_path, 'create_participation') }
-      it { should == "/youroom/redmine/participation/create" }
-    end
-
-    describe "when method is 'destroy_participation'" do
-      subject { @client.send(:request_path, 'destroy_participation') }
-      it { should == "/youroom/redmine/participation/destroy" }
-    end
-
-  end
-
-  describe "#optimize_params" do
-    before do
-      @client = Youroom::OAuth.new(access_token, WW_URL)
-    end
-
-    describe "case1: no nest hash" do
-      subject { @client.send(:optimize_params, {:a=> "b" }) }
-      it { should == {"a"=>"b"}}
-    end
-
-    describe "case2: nested hash" do
-      subject { @client.send(:optimize_params, {:a=> "b", :b => {:c=>3} }) }
-      it { should == {"a"=>"b", "b[c]"=>"3"}}
-    end
-
-    describe "case3: nested hash and has many elements in hash" do
-      subject { @client.send(:optimize_params, {:a=> "b", :b => {:c=>3, :d=>4} }) }
-      it { should == {"a"=>"b", "b[c]"=>"3", "b[d]"=>"4"}}
-    end
-  end
 
   describe "#create_user" do
     before { @client = Youroom::OAuth.new(access_token, WW_URL) }
@@ -115,31 +82,12 @@ describe Youroom::OAuth do
     end
 
     describe "#destroy_paticipation" do
-      describe "when can crate participation" do
-        before do
-          WW::Server.mock(:youroom, :room_id => @redmine_project.room_id.to_s, :bpr => @redmine_user.login).
-                     post("/youroom/redmine/participation/destroy") do
-            { :status => "Created" }.to_json
-          end
-        end
-
-        after do
-          WW::Server.verify(:youroom)
-        end
-
-        subject { @client.destroy_participation(@redmine_project, @redmine_user) }
-        it { should be_a_instance_of(Net::HTTPOK) }
-      end
-
-      describe "when can't create participation" do
-        it do
-          lambda do
-            @client.create_participation("hoge", @redmine_user)
-          end.should raise_exception(ArgumentError)
-        end
+      it "should receive DestroyParticipation.new and call" do
+        Youroom::DestroyParticipation.should_receive(:new).and_return(destroy_participation)
+        destroy_participation.should_receive(:call)
+        @client.destroy_participation("room_id", "test_pochi@gmail.com")
       end
     end
-
   end
 end
 

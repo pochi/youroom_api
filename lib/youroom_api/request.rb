@@ -16,8 +16,12 @@ module Youroom
     end
 
     def call
-      Net::HTTP.start(host, port) do |http|
-        http.request(request)
+      begin
+        Net::HTTP.start(host, port) do |http|
+          http.request(request)
+        end
+      rescue => e
+        return e
       end
     end
 
