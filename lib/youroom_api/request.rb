@@ -9,6 +9,12 @@ module Youroom
       parse(url)
     end
 
+    def request
+      Net::HTTP::Post.new(path).tap do |req|
+        req.set_form_data(params.optimize)
+      end
+    end
+
     def call
       Net::HTTP.start(host, port) do |http|
         http.request(request)

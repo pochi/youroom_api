@@ -68,11 +68,6 @@ describe Youroom::OAuth do
       @client = Youroom::OAuth.new(access_token, WW_URL)
     end
 
-    describe "when method is 'create_user'" do
-      subject { @client.send(:request_path, 'create_user') }
-      it { should == "/youroom/redmine/user/create" }
-    end
-
     describe "when method is 'create_participation'" do
       subject { @client.send(:request_path, 'create_participation') }
       it { should == "/youroom/redmine/participation/create" }
@@ -115,15 +110,13 @@ describe Youroom::OAuth do
                    post("/youroom/redmine/user/create") do
           { :status => "Created" }.to_json
         end
-
-        @redmine_user = User.new("pochi", "test_pochi@gmail.com", "pit01205")
       end
 
       after do
         WW::Server.verify(:youroom)
       end
 
-      subject { @client.create_user(@redmine_user) }
+      subject { @client.create_user("pochi", "test_pochi@gmail.com", "pit01205") }
       it { should be_a_instance_of(Net::HTTPOK) }
     end
 

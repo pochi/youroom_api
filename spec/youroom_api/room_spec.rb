@@ -25,6 +25,7 @@ describe Youroom::CreateRoom do
       subject { Youroom::CreateRoom.new("hoge", @url) }
       it { should be_a(Youroom::CreateRoom) }
       its(:url) { should == @url }
+      its(:name) { should == "hoge" }
     end
   end
 
@@ -44,5 +45,29 @@ describe Youroom::CreateRoom do
     it "should call request url with {:name=>'hoge'}" do
       should be_an_instance_of(Net::HTTPOK)
     end
+  end
+
+  describe "#request" do
+    before do
+      @room = Youroom::CreateRoom.new("hoge", WW_URL)
+    end
+    subject { @room.request }
+    it { should be_a(Net::HTTP::Post) }
+  end
+
+  describe "#params" do
+    before do
+      @room = Youroom::CreateRoom.new("hoge", WW_URL)
+    end
+    subject { @room.params }
+    it { should == { :name => "hoge" }}
+  end
+
+  describe "#path" do
+    before do
+      @room = Youroom::CreateRoom.new("hoge", WW_URL)
+    end
+    subject { @room.path }
+    it { should == "/youroom/redmine/group/create"}
   end
 end

@@ -2,16 +2,10 @@ module Youroom
   class CreateRoom < Request
     attr_reader :name
 
-    def initialize(name=nil, url="")
+    def initialize(name=nil, url=Youroom::BASE_URL)
       required_structure(name, String, Symbol)
       @name = name
       super(url)
-    end
-
-    def request
-      Net::HTTP::Post.new(path).tap do |req|
-        req.set_form_data(params.optimize)
-      end
     end
 
     def path
@@ -19,7 +13,7 @@ module Youroom
     end
 
     def params
-      { :name => @name }
+      { :name => name }
     end
   end
 end

@@ -5,4 +5,12 @@ describe Youroom::Request do
     subject { Youroom::Request.new("http://www.yahoo.co.jp") }
     it { should be_a(Youroom::Request) }
   end
+
+  describe "#request" do
+    before do
+      @room = Youroom::CreateRoom.new("hoge", WW_URL)
+    end
+    subject { @room.request }
+    it { should be_a(Net::HTTP::Post) }
+  end
 end

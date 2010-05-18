@@ -20,12 +20,9 @@ module Youroom
     end
 
     # user -> redmine user object
-    def create_user(user)
-      if required_structure(user, User)
-        throw_request(current_method, {:name => user.name, :email => user.mail, :bpr => user.login})
-      else
-        raise ArgumentError
-      end
+    def create_user(name, email, bpr=nil)
+      @request = CreateUser.new(name, email, bpr, url)
+      request.call
     end
 
     # projct -> redmine project object
@@ -71,7 +68,6 @@ module Youroom
 
     def request_path(method)
       case method
-        when 'create_user'; File.join(@path, 'redmine', 'user', 'create')
         when 'create_participation'; File.join(@path, 'redmine', 'participation', 'create')
         when 'destroy_participation'; File.join(@path, 'redmine', 'participation', 'destroy')
       end
