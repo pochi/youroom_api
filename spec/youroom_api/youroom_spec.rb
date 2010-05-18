@@ -6,6 +6,14 @@ describe Youroom::OAuth do
     @access_token ||= mock(OAuth::AccessToken)
   end
 
+  def create_room
+    @create_room ||= mock(Youroom::CreateRoom)
+  end
+
+  def create_user
+    @create_user ||= mock(Youroom::CreateUser)
+  end
+
   describe "#initialize" do
     describe "without url" do
       subject { Youroom::OAuth.new(access_token) }
@@ -27,40 +35,15 @@ describe Youroom::OAuth do
   end
 
   describe "#create_room" do
-    before { @client = Youroom::OAuth.new(access_token, WW_URL) }
-
-    describe "when before throw request(validation)" do
-      before do
-        @ex1 = ["hoge", "moge"]
-        @ex2 = {:room_name => "moge"}
-      end
-
-      it do
-        lambda { @client.create_room(@ex1) }.should raise_exception(ArgumentError)
-      end
-
-      it do
-        lambda { @client.create_room(@ex2) }.should raise_exception(ArgumentError)
-      end
+    before do
+      @client = Youroom::OAuth.new(access_token, WW_URL)
     end
 
-    describe "when throw request" do
-      before do
-        WW::Server.mock(:youroom, :name => "hoge").post("/youroom/redmine/group/create") do
-          { :status => "Created" }.to_json
-        end
-      end
-
-      after do
-        WW::Server.verify(:youroom)
-      end
-
-      subject { @client.create_room("hoge") }
-      it "should call request url with {:name=>'hoge'}" do
-        should be_an_instance_of(Net::HTTPOK)
-      end
+    it "should receive CreateRoom.new and call" do
+      Youroom::CreateRoom.should_receive(:new).and_return(create_room)
+      create_room.should_receive(:call)
+      @client.create_room("hoge")
     end
-
   end
 
   describe "#request_path" do
@@ -104,29 +87,10 @@ describe Youroom::OAuth do
   describe "#create_user" do
     before { @client = Youroom::OAuth.new(access_token, WW_URL) }
 
-    describe "when can create user" do
-      before do
-        WW::Server.mock(:youroom, :name => "pochi", :email => "test_pochi@gmail.com", :bpr => "pit01205").
-                   post("/youroom/redmine/user/create") do
-          { :status => "Created" }.to_json
-        end
-      end
-
-      after do
-        WW::Server.verify(:youroom)
-      end
-
-      subject { @client.create_user("pochi", "test_pochi@gmail.com", "pit01205") }
-      it { should be_a_instance_of(Net::HTTPOK) }
-    end
-
-    describe "when can't call method" do
-      it "should be raise_exception" do
-        lambda do
-          # this parameter should error because structure is not "User"
-          @client.create_user({:name=>"pochi",:email=>"hoge@gmail.com",:bpr=>"pit0000001"})
-        end.should raise_exception(ArgumentError)
-      end
+    it "should receive Createuser.new and call" do
+      Youroom::CreateUser.should_receive(:new).and_return(create_user)
+      create_user.should_receive(:call)
+      @client.create_user("pochi", "test_pochi@gmail.com", "pit01205")
     end
   end
 
