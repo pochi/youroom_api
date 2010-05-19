@@ -6,8 +6,14 @@ Rakefile
 lib/youroom_api.rb
 lib//object_extention.rb
 lib/youroom_api/youroom.rb
+lib/youroom_api/base.rb
+lib/youroom_api/request.rb
+lib/youroom_api/room.rb
+lib/youroom_api/user.rb
+lib/youroom_api/entry.rb
+lib/youroom_api/participation.rb
+lib/youroom_api/create_participation.rb
+lib/youroom_api/destroy_participation.rb
 lib/youroom_api/youroom_oauth.rb
-spec/setup_test_model.rb
-spec/spec_helper.rb
-spec/youroom_api/youroom_spec.rb
+
 

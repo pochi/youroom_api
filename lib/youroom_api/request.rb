@@ -2,10 +2,12 @@ require 'net/http'
 require 'uri'
 
 module Youroom
-  class Request
-    attr_reader :url, :host, :port, :path
+  class Request < Base
+    attr_reader :access_token
 
-    def initialize(url)
+    def initialize(access_token, url=BASE_URL)
+      required_structure(access_token, ::OAuth::AccessToken)
+      @access_token = access_token
       parse(url)
     end
 
@@ -15,6 +17,15 @@ module Youroom
       end
     end
 
+    def get_entries(room_id)
+      Entry.new(access_token, room_id, url)
+    end
+
+    def get_call
+      access_token.get(path)
+    end
+
+    # deprecated in future
     def call
       begin
         Net::HTTP.start(host, port) do |http|
@@ -23,17 +34,6 @@ module Youroom
       rescue => e
         return e
       end
-    end
-
-    private
-    def required_structure(name, *elements)
-      raise ArgumentError unless elements.include?(name.class)
-    end
-
-    def parse(url)
-      @url = url
-      uri = URI.parse(url)
-      @host, @port, @path = uri.host, uri.port, uri.path
     end
   end
 end

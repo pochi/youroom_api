@@ -3,7 +3,11 @@ require File.expand_path("../spec_helper", File.dirname(__FILE__))
 describe Youroom::OAuth do
 
   def access_token
-    @access_token ||= mock(OAuth::AccessToken)
+    @access_token ||= OAuth::AccessToken.new(consumer, "hoge", "hoge")
+  end
+
+  def consumer
+    @consumer ||= OAuth::Consumer.new("a", "b")
   end
 
   def create_room
@@ -23,13 +27,18 @@ describe Youroom::OAuth do
   end
 
   describe "#initialize" do
-    subject { Youroom::OAuth.new(access_token) }
+    describe "when can create instance" do
+      subject { Youroom::OAuth.new(access_token) }
 
-    it { should be_a(Youroom::OAuth) }
-    its(:url) { should == "https://home.youroom.in/" }
-    its(:host) { should == "home.youroom.in" }
-    its(:path) { should == "/"}
+      it { should be_a(Youroom::OAuth) }
+      its(:request) { should be_a(Youroom::Request) }
+    end
 
+    describe "when can not create instance" do
+      it "should raise ArgumentError" do
+        lambda {  Youroom::OAuth.new("hoge") }.should raise_exception(ArgumentError)
+      end
+    end
   end
 
   describe "#ww" do
@@ -82,6 +91,17 @@ describe Youroom::OAuth do
         destroy_participation.should_receive(:call)
         @client.destroy_participation("room_id", "test_pochi@gmail.com")
       end
+    end
+  end
+
+  describe "#entries" do
+    before do
+      @client = Youroom::OAuth.new(access_token, WW_URL)
+    end
+
+    it "should receive Entry.get_from" do
+      @client.request.should_receive(:get_entries)
+      @client.entries("room_id")
     end
   end
 end

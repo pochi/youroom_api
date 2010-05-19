@@ -1,17 +1,10 @@
-require 'object_extention'
-require 'uri'
-require 'net/http'
-
 module Youroom
-  BASE_URL = 'https://home.youroom.in/'
 
-  class OAuth
-    attr_accessor :url, :host, :port, :path, :header, :request
+  class OAuth < Base
+    attr_accessor :request
 
-    def initialize(access_token, url='https://home.youroom.in/')
-      @url = url
-      parse(@url)
-      @header = ""
+    def initialize(access_token, url=BASE_URL)
+      @request = Request.new(access_token, url)
     end
 
     def create_room(name)
@@ -34,10 +27,8 @@ module Youroom
       request.call
     end
 
-    private
-    def parse(url)
-      uri = URI.parse(url)
-      @host, @port, @path = uri.host, uri.port, uri.path
+    def entries(room_id)
+      request.get_entries(room_id)
     end
   end
 

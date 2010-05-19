@@ -3,18 +3,11 @@ require 'rubygems'
 require 'spec'
 require 'ww'
 require 'json'
-require 'oauth'
 
 
-$LOAD_PATH << File.expand_path("..", File.dirname(__FILE__))
-$LOAD_PATH << File.expand_path("../lib/youroom_api", File.dirname(__FILE__))
+$LOAD_PATH << File.expand_path("../lib", File.dirname(__FILE__))
 
-
-require "request"
-require "participation"
-Dir[File.join(File.expand_path("..", File.dirname(__FILE__)), "lib", "youroom_api", "*")].each do |file|
-  require file
-end
+require "youroom_api.rb"
 
 
 load File.expand_path("setup_test_model.rb", File.dirname(__FILE__))
