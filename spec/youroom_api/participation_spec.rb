@@ -5,6 +5,14 @@ describe Youroom::Participation do
     @url = "https://home.youroom.in/"
   end
 
+  def access_token
+    @access_token ||= OAuth::AccessToken.new(consumer, "hoge", "hoge")
+  end
+
+  def consumer
+    @consumer ||= OAuth::Consumer.new("a", "b")
+  end
+
   describe "#initialize" do
     describe "when can not create instanse" do
       before do
@@ -23,20 +31,21 @@ describe Youroom::Participation do
     end
 
     describe "when can create user instance" do
-      subject { Youroom::Participation.new("room_id", "test_pochi@gmail.com") }
+      subject { Youroom::Participation.new(access_token, "room_id", "participation_id") }
       it { should be_a(Youroom::Participation) }
       its(:url) { should == @url }
       its(:room_id) { should == "room_id" }
-      its(:email) { should == "test_pochi@gmail.com" }
+      its(:participation_id) { should == "participation_id" }
     end
   end
 
-  describe "#params" do
+  describe "#path" do
     before do
-      @participation = Youroom::Participation.new("room_id", "test_pochi@gmail.com")
+      @participation = Youroom::Participation.new(access_token, "room_id", "participation_id", WW_URL)
     end
-    subject { @participation.params }
-    it { should == { :room_id => "room_id", :email => "test_pochi@gmail.com"} }
+
+    subject { @participation.path }
+    it { should == "http://localhost:8083/youroom/group/room_id/participations/participation_id.json" }
   end
 
 end

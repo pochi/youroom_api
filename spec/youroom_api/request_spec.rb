@@ -9,6 +9,14 @@ describe Youroom::Request do
     @consumer ||= OAuth::Consumer.new("a", "b")
   end
 
+  def entry
+    @entry ||= mock(Youroom::Entry)
+  end
+
+  def participation
+    @participation ||= mock(Youroom::Participation)
+  end
+
   describe "#initialize" do
     subject { Youroom::Request.new(access_token, "http://www.yahoo.co.jp") }
     it { should be_a(Youroom::Request) }
@@ -16,28 +24,27 @@ describe Youroom::Request do
     its(:access_token) { should == access_token }
   end
 
-=begin
-  describe "#request" do
-    before do
-      @room = Youroom::Request.new(access_token, WW_URL)
-    end
-    subject { @room.request }
-    it { pending #should be_a(Net::HTTP::Post) }
-  end
-=end
-
-  describe "#get_entries(room_id)" do
+  describe "#get_entry(room_id)" do
     before do
       request = Youroom::Request.new(access_token)
-      @entry = request.get_entries("room_id")
     end
-
-    it { @entry.should be_a(Youroom::Entry) }
 
     it "should call Entry.new" do
-      Youroom::Entry.should_receive(:new)
-      Youroom::Request.new(access_token).get_entries("room_id")
+      Youroom::Entry.stub!(:new).and_return(entry)
+      entry.should_receive(:call)
+      Youroom::Request.new(access_token).get_entry("room_id")
+    end
+  end
+
+  describe "#get_participation(room_id, participation_id)" do
+    before do
+      request = Youroom::Request.new(access_token)
     end
 
+    it "should call Participation.new" do
+      Youroom::Participation.should_receive(:new).and_return(participation)
+      participation.should_receive(:call)
+      Youroom::Request.new(access_token).get_participation("room_id", "participation_id")
+    end
   end
 end

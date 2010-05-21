@@ -1,15 +1,15 @@
 module Youroom
   class Participation < Request
-    attr_reader :room_id, :email
+    attr_reader :room_id, :participation_id
 
-    def initialize(room_id, email, url=BASE_URL)
-      [room_id, email].each {|arg| required_structure(arg, String, Symbol) }
-      @room_id, @email = room_id, email
-      super(url)
+    def initialize(access_token, room_id, participation_id,  url=BASE_URL)
+      [room_id, participation_id].each {|arg| required_structure(arg, String, Integer) }
+      @room_id, @participation_id = room_id, participation_id
+      super(access_token, url)
     end
 
-    def params
-      { :room_id => room_id, :email => email }
+    def path
+      File.join(url, "group", room_id, "participations", participation_id+".json")
     end
   end
 end

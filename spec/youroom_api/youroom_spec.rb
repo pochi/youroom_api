@@ -94,14 +94,25 @@ describe Youroom::OAuth do
     end
   end
 
-  describe "#entries" do
+  describe "#entry" do
     before do
       @client = Youroom::OAuth.new(access_token, WW_URL)
     end
 
     it "should receive Entry.get_from" do
-      @client.request.should_receive(:get_entries)
-      @client.entries("room_id")
+      @client.request.should_receive(:get_entry)
+      @client.entry("room_id")
+    end
+  end
+
+  describe "#participation" do
+    before do
+      @client = Youroom::OAuth.new(access_token, WW_URL)
+    end
+
+    it "should receive Participation.get_participation" do
+      @client.request.should_receive(:get_participation)
+      @client.participation("room_id", "participation_id")
     end
   end
 end
