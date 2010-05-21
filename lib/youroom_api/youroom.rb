@@ -34,8 +34,15 @@ module Youroom
     def participation(room_id, participation_id)
       request.get_participation(room_id, participation_id)
     end
-  end
 
+    def all_timeline
+      request.get_all_timeline
+    end
+
+    def unread_timeline
+      request.get_unread_timeline
+    end
+  end
 end
 
 

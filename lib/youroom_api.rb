@@ -16,5 +16,7 @@ module Youroom
   autoload :CreateUser, 'youroom_api/user'
   autoload :CreateRoom, 'youroom_api/room'
   autoload :Entry, 'youroom_api/entry'
+  autoload :HomeTimeline, 'youroom_api/timeline'
+  autoload :UnreadTimeline, 'youroom_api/unread_timeline'
 end
 

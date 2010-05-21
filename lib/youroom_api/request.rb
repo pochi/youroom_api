@@ -19,6 +19,14 @@ module Youroom
       Participation.new(access_token, room_id, participation_id, url).call
     end
 
+    def get_all_timeline
+      HomeTimeline.new(access_token, url).call
+    end
+
+    def get_unread_timeline
+      UnreadTimeline.new(access_token, url).call
+    end
+
     def call
       access_token.get(path)
     end

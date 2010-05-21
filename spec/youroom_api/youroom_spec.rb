@@ -124,6 +124,28 @@ describe Youroom::OAuth do
       @client.participation("room_id", "participation_id")
     end
   end
+
+  describe "#all_timeline" do
+    before do
+      @client = Youroom::OAuth.new(access_token, WW_URL)
+    end
+
+    it "should receive Participation.get_participation" do
+      @client.request.should_receive(:get_all_timeline)
+      @client.all_timeline
+    end
+  end
+
+  describe "#unread_timeline" do
+    before do
+      @client = Youroom::OAuth.new(access_token, WW_URL)
+    end
+
+    it "should receive Participation.get_participation" do
+      @client.request.should_receive(:get_unread_timeline)
+      @client.unread_timeline
+    end
+  end
 end
 
 

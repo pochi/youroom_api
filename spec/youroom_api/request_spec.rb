@@ -17,6 +17,15 @@ describe Youroom::Request do
     @participation ||= mock(Youroom::Participation)
   end
 
+  def timeline
+    @timeline ||= mock(Youroom::HomeTimeline)
+  end
+
+  def unread_timeline
+    @timeline ||= mock(Youroom::UnreadTimeline)
+  end
+
+
   describe "#initialize" do
     subject { Youroom::Request.new(access_token, "http://www.yahoo.co.jp") }
     it { should be_a(Youroom::Request) }
@@ -62,4 +71,29 @@ describe Youroom::Request do
       Youroom::Request.new(access_token).get_participation("room_id", "participation_id")
     end
   end
+
+  describe "#get_all_timeline" do
+    before do
+      request = Youroom::Request.new(access_token)
+    end
+
+    it "should call Youroom:TimeLine.new" do
+      Youroom::HomeTimeline.should_receive(:new).and_return(timeline)
+      timeline.should_receive(:call)
+      Youroom::Request.new(access_token).get_all_timeline
+    end
+  end
+
+  describe "#get_unread_timeline" do
+    before do
+      request = Youroom::Request.new(access_token)
+    end
+
+    it "should call Youroom:TimeLine.new" do
+      Youroom::UnreadTimeline.should_receive(:new).and_return(unread_timeline)
+      unread_timeline.should_receive(:call)
+      Youroom::Request.new(access_token).get_unread_timeline
+    end
+  end
+
 end
