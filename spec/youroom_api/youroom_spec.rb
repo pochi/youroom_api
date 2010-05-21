@@ -99,9 +99,18 @@ describe Youroom::OAuth do
       @client = Youroom::OAuth.new(access_token, WW_URL)
     end
 
-    it "should receive Entry.get_from" do
-      @client.request.should_receive(:get_entry)
-      @client.entry("room_id")
+    describe "when args size == 1" do
+      it "should receive Entry.get_entry" do
+        @client.request.should_receive(:get_entry)
+        @client.entry("room_id")
+      end
+    end
+
+    describe "when args size == 2" do
+      it "should receive Entry.get_entry" do
+        @client.request.should_receive(:get_entry)
+        @client.entry("room_id")
+      end
     end
   end
 

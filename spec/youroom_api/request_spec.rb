@@ -30,11 +30,26 @@ describe Youroom::Request do
     end
 
     it "should call Entry.new" do
-      Youroom::Entry.stub!(:new).and_return(entry)
+      Youroom::Entry.should_receive(:new).with(access_token, "room_id", nil, Youroom::BASE_URL).
+                                          and_return(entry)
       entry.should_receive(:call)
       Youroom::Request.new(access_token).get_entry("room_id")
     end
   end
+
+  describe "#get_entry(room_id, mutter_id)" do
+    before do
+      request = Youroom::Request.new(access_token)
+    end
+
+    it "should call Entry.new" do
+      Youroom::Entry.should_receive(:new).with(access_token, "room_id", "mutter_id", Youroom::BASE_URL).
+                                          and_return(entry)
+      entry.should_receive(:call)
+      Youroom::Request.new(access_token).get_entry("room_id", "mutter_id")
+    end
+  end
+
 
   describe "#get_participation(room_id, participation_id)" do
     before do

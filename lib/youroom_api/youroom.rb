@@ -27,8 +27,8 @@ module Youroom
       request.call
     end
 
-    def entry(room_id)
-      request.get_entry(room_id)
+    def entry(room_id, mutter_id=nil)
+      request.get_entry(room_id, mutter_id)
     end
 
     def participation(room_id, participation_id)

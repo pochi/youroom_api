@@ -11,8 +11,8 @@ module Youroom
       parse(url)
     end
 
-    def get_entry(room_id)
-      Entry.new(access_token, room_id, url).call
+    def get_entry(room_id, mutter_id=nil)
+      Entry.new(access_token, room_id, mutter_id, url).call
     end
 
     def get_participation(room_id, participation_id)
