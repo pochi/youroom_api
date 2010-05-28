@@ -22,6 +22,10 @@ module Youroom
     def unread_timeline
       request.get_unread_timeline
     end
+
+    def update(room_id, content)
+      request.post_entry(room_id, content)
+    end
   end
 end
 

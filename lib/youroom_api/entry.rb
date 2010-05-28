@@ -1,6 +1,6 @@
 module Youroom
   class Entry < Request
-    attr_reader :room_id, :mutter_id, :access_token
+    attr_reader :room_id, :mutter_id
 
     def initialize(access_token, room_id, mutter_id=nil, url=BASE_URL)
       required_structure(room_id, String, Symbol)

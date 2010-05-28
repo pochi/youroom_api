@@ -64,7 +64,7 @@ describe Youroom::OAuth do
     describe "when args size == 2" do
       it "should receive Entry.get_entry" do
         @client.request.should_receive(:get_entry)
-        @client.entry("room_id")
+        @client.entry("room_id", "mutter_id")
       end
     end
   end
@@ -99,6 +99,17 @@ describe Youroom::OAuth do
     it "should receive Participation.get_participation" do
       @client.request.should_receive(:get_unread_timeline)
       @client.unread_timeline
+    end
+  end
+
+  describe "#update(room_id, mutter_content)" do
+    before do
+      @client = Youroom::OAuth.new(access_token, WW_URL)
+    end
+
+    it "should receive CreateEntry.new" do
+      @client.request.should_receive(:post_entry)
+      @client.update("room_id", "hogehoge")
     end
   end
 end

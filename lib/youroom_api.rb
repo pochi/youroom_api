@@ -14,5 +14,6 @@ module Youroom
   autoload :Participation, 'youroom_api/participation'
   autoload :HomeTimeline, 'youroom_api/timeline'
   autoload :UnreadTimeline, 'youroom_api/unread_timeline'
+  autoload :PostEntry, 'youroom_api/post_entry'
 end
 

@@ -25,6 +25,10 @@ describe Youroom::Request do
     @timeline ||= mock(Youroom::UnreadTimeline)
   end
 
+  def create_entry_request
+    @create_entry_request ||= mock(Youroom::PostEntry)
+  end
+
 
   describe "#initialize" do
     subject { Youroom::Request.new(access_token, "http://www.yahoo.co.jp") }
@@ -93,6 +97,18 @@ describe Youroom::Request do
       Youroom::UnreadTimeline.should_receive(:new).and_return(unread_timeline)
       unread_timeline.should_receive(:call)
       Youroom::Request.new(access_token).get_unread_timeline
+    end
+  end
+
+  describe "#post_entry(room_id, content)" do
+    before do
+      request = Youroom::Request.new(access_token)
+    end
+
+    it "should call Youroom:TimeLine.new" do
+      Youroom::PostEntry.should_receive(:new).and_return(create_entry_request)
+      create_entry_request.should_receive(:post)
+      Youroom::Request.new(access_token).post_entry("room_id", "hogehoge")
     end
   end
 

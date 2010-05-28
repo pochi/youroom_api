@@ -37,7 +37,7 @@ describe Youroom::HomeTimeline do
 
     subject { @client.call }
     it "should call request url" do
-      should be_an_instance_of(Net::HTTPOK)
+      should be_a_instance_of(Net::HTTPOK)
     end
   end
 

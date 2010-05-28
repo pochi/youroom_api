@@ -27,8 +27,16 @@ module Youroom
       UnreadTimeline.new(access_token, url).call
     end
 
+    def post_entry(room_id, content)
+      PostEntry.new(access_token, room_id, content, url).post
+    end
+
     def call
       access_token.get(path)
+    end
+
+    def post
+      access_token.post(path, params)
     end
   end
 end
