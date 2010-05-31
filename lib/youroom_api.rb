@@ -30,5 +30,6 @@ module Youroom
   # relation participation
   autoload :Participation, 'youroom_api/request/participation'
   autoload :AddParticipation, 'youroom_api/request/add_participation' # enterprise only
+  autoload :DestroyParticipation, 'youroom_api/request/destroy_participation' # enterprise only
 end
 

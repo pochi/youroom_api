@@ -143,4 +143,16 @@ describe Youroom::Request do
     end
   end
 
+  describe "#destoy_participation" do
+    before do
+      request = Youroom::Request.new(access_token)
+    end
+
+    it "should call Youroom:DestroyParticipation.new" do
+      Youroom::DestroyParticipation.should_receive(:new).and_return(destroy_participation_request)
+      destroy_participation_request.should_receive(:delete)
+      Youroom::Request.new(access_token).destroy_participation("3", "4", "pochi.black@gmail.com")
+    end
+  end
+
 end

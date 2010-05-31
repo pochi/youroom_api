@@ -91,4 +91,8 @@ Spec::Runner.configure do |config|
   def add_participation_request
     @add_participation_request ||= mock(Youroom::AddParticipation)
   end
+
+  def destroy_participation_request
+    @destroy_participation_request ||= mock(Youroom::DestroyParticipation)
+  end
 end

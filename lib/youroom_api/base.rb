@@ -15,9 +15,9 @@ module Youroom
 
     def enterprise_host
       # production url
-      "https://enterprise.youroom.in/"
+      # "https://enterprise.youroom.in/"
       # development url
-      #"https://enterprise.youroom.sg/"
+      "https://enterprise.youroom.sg/"
     end
   end
 end
