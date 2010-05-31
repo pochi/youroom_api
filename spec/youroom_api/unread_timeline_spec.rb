@@ -6,12 +6,23 @@ describe Youroom::UnreadTimeline do
   end
 
   describe "#path" do
-    before do
-      @client = Youroom::UnreadTimeline.new(access_token, WW_URL)
+    describe "when url is original" do
+      before do
+        @client = Youroom::UnreadTimeline.new(access_token)
+      end
+
+      subject { @client.path }
+      it { should == "https://home.youroom.in/unreads?format=json"}
     end
 
-    subject { @client.path }
-    it { should == "http://localhost:8083/youroom/home/unreads?format=json"}
+    describe "when url is not original" do
+      before do
+        @client = Youroom::UnreadTimeline.new(access_token, WW_URL)
+      end
+
+      subject { @client.path }
+      it { should == "http://localhost:8083/youroom/home/unreads?format=json"}
+    end
   end
 
   describe "#call" do

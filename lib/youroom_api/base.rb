@@ -1,6 +1,6 @@
 module Youroom
   class Base
-    attr_reader :url, :host, :port, :path
+    attr_reader :url, :host, :port
 
     private
     def required_structure(name, *elements)
@@ -10,7 +10,7 @@ module Youroom
     def parse(url)
       @url = url
       uri = URI.parse(url)
-      @host, @port, @path = uri.host, uri.port, uri.path
+      @host, @port = uri.host, uri.port
     end
   end
 end
