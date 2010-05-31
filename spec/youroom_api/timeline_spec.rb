@@ -7,18 +7,21 @@ describe Youroom::HomeTimeline do
 
   describe "#path" do
     before do
-      @client = Youroom::HomeTimeline.new(access_token, WW_URL)
+      @client = Youroom::HomeTimeline.new(access_token)
     end
 
     subject { @client.path }
-    it { should == "http://localhost:8083/youroom/home/all?format=json"}
+    it { should == "https://home.youroom.in/all?format=json"}
   end
 
   describe "#call" do
     before do
       @client = Youroom::HomeTimeline.new(access_token, WW_URL)
+      # dammy ww url
+      @client.should_receive(:path).and_return("http://localhost:8083/all?format=json")
+
       # NOTICE: WW not check params
-      WW::Server.mock(:youroom, { :format => "json"} ).get("/youroom/home/all") do
+      WW::Server.mock(:youroom, { :format => "json"} ).get("/all") do
         { :entry => "hogehoge" }.to_json
       end
     end
