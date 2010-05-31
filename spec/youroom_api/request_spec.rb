@@ -14,9 +14,9 @@ describe Youroom::Request do
       request = Youroom::Request.new(access_token)
     end
 
-    it "should call Entry.new" do
-      Youroom::Entry.should_receive(:new).with(access_token, "room_id", nil, Youroom::BASE_URL).
-                                          and_return(entry)
+    it "should call GetEntry.new" do
+      Youroom::GetEntry.should_receive(:new).with(access_token, "room_id", nil, Youroom::BASE_URL).
+                                             and_return(entry)
       entry.should_receive(:call)
       Youroom::Request.new(access_token).get_entry("room_id")
     end
@@ -28,8 +28,8 @@ describe Youroom::Request do
     end
 
     it "should call Entry.new" do
-      Youroom::Entry.should_receive(:new).with(access_token, "room_id", "mutter_id", Youroom::BASE_URL).
-                                          and_return(entry)
+      Youroom::GetEntry.should_receive(:new).with(access_token, "room_id", "mutter_id", Youroom::BASE_URL).
+                                                  and_return(entry)
       entry.should_receive(:call)
       Youroom::Request.new(access_token).get_entry("room_id", "mutter_id")
     end

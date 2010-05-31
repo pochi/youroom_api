@@ -12,7 +12,7 @@ module Youroom
     end
 
     def get_entry(room_id, mutter_id=nil)
-      Entry.new(access_token, room_id, mutter_id, url).call
+      GetEntry.new(access_token, room_id, mutter_id, url).call
     end
 
     def get_participation(room_id, participation_id)
@@ -36,7 +36,6 @@ module Youroom
     end
 
     def call
-      puts path
       access_token.get(path)
     end
 

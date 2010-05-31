@@ -53,7 +53,7 @@ Spec::Runner.configure do |config|
   end
 
   def entry
-    @entry ||= mock(Youroom::Entry)
+    @entry ||= mock(Youroom::GetEntry)
   end
 
   def participation

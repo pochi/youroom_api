@@ -11,6 +11,7 @@ module Youroom
   autoload :OAuth, 'youroom_api/youroom'
   autoload :Request, 'youroom_api/request'
   autoload :Entry, 'youroom_api/request/entry'
+  autoload :GetEntry, 'youroom_api/request/get_entry'
   autoload :Participation, 'youroom_api/request/participation'
   autoload :HomeTimeline, 'youroom_api/request/timeline'
   autoload :UnreadTimeline, 'youroom_api/request/unread_timeline'

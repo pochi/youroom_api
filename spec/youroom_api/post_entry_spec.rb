@@ -27,18 +27,29 @@ describe Youroom::PostEntry do
   end
 
   describe "#path" do
-    before do
-      @client = Youroom::PostEntry.new(access_token, "room_id", "hogehoge", WW_URL)
+    describe "when url is original" do
+      before do
+        @client = Youroom::PostEntry.new(access_token, "room_id", "hogehoge")
+      end
+
+      subject { @client.path }
+      it { should == "https://room_id.youroom.in/entries?format=json"}
     end
 
-    subject { @client.path }
-    it { should == "http://localhost:8083/youroom/group/room_id/entries/create"}
+    describe "when url is not original" do
+      before do
+        @client = Youroom::PostEntry.new(access_token, "room_id", "hogehoge", WW_URL)
+      end
+
+      subject { @client.path }
+      it { should == "http://localhost:8083/youroom/group/room_id/entries?format=json"}
+    end
   end
 
   describe "#post" do
     before do
       @client = Youroom::PostEntry.new(access_token, "room_id", "hogehoge", WW_URL)
-      WW::Server.mock(:youroom).post("/youroom/group/room_id/entries/create") do
+      WW::Server.mock(:youroom).post("/youroom/group/room_id/entries") do
         { :status => "Created" }.to_json
       end
     end

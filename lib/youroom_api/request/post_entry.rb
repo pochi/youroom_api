@@ -1,5 +1,5 @@
 module Youroom
-  class PostEntry < Request
+  class PostEntry < Entry
     attr_reader :room_id, :content
 
     def initialize(access_token, room_id, content, url=BASE_URL)
@@ -9,7 +9,11 @@ module Youroom
     end
 
     def path
-      File.join(url, 'group', room_id, 'entries', 'create')
+      if url == BASE_URL
+        File.join(group_host, 'entries?format=json')
+      else
+        File.join(group_host, 'group', room_id, 'entries?format=json')
+      end
     end
 
     def params
