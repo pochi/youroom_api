@@ -5,14 +5,6 @@ describe Youroom::Participation do
     @url = "https://home.youroom.in/"
   end
 
-  def access_token
-    @access_token ||= OAuth::AccessToken.new(consumer, "hoge", "hoge")
-  end
-
-  def consumer
-    @consumer ||= OAuth::Consumer.new("a", "b")
-  end
-
   describe "#initialize" do
     describe "when can not create instanse" do
       before do

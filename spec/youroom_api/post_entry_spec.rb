@@ -1,14 +1,6 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 describe Youroom::PostEntry do
-  def access_token
-    @access_token ||= OAuth::AccessToken.new(consumer, "hoge", "hoge")
-  end
-
-  def consumer
-    @consumer ||= OAuth::Consumer.new("a", "b")
-  end
-
   describe "#initialize" do
     describe "when can create instance" do
       subject { Youroom::PostEntry.new(access_token, "room_id", "hogehoge") }

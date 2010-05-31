@@ -27,4 +27,48 @@ Spec::Runner.configure do |config|
   end
 
   WW::Server.start_once(:youroom)
+
+  def access_token
+    @access_token ||= OAuth::AccessToken.new(consumer, "hoge", "hoge")
+  end
+
+  def consumer
+    @consumer ||= OAuth::Consumer.new("a", "b")
+  end
+
+  def create_room
+    @create_room ||= mock(Youroom::CreateRoom)
+  end
+
+  def create_user
+    @create_user ||= mock(Youroom::CreateUser)
+  end
+
+  def create_participation
+    @create_participation ||= mock(Youroom::CreateParticipation)
+  end
+
+  def destroy_participation
+    @destroy_participation ||= mock(Youroom::DestroyParticipation)
+  end
+
+  def entry
+    @entry ||= mock(Youroom::Entry)
+  end
+
+  def participation
+    @participation ||= mock(Youroom::Participation)
+  end
+
+  def timeline
+    @timeline ||= mock(Youroom::HomeTimeline)
+  end
+
+  def unread_timeline
+    @timeline ||= mock(Youroom::UnreadTimeline)
+  end
+
+  def create_entry_request
+    @create_entry_request ||= mock(Youroom::PostEntry)
+  end
 end

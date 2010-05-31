@@ -1,9 +1,7 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 describe Hash do
-
   describe "#optimize" do
-
     describe "case1: no nest hash" do
       before { @hash = { :a => "b"} }
       subject { @hash.optimize }
@@ -22,5 +20,4 @@ describe Hash do
       it { should == {"a"=>"b", "b[c]"=>"3", "b[d]"=>"4"}}
     end
   end
-
 end

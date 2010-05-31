@@ -1,14 +1,6 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 describe Youroom::Entry do
-  def access_token
-    @access_token ||= OAuth::AccessToken.new(consumer, "hoge", "hoge")
-  end
-
-  def consumer
-    @consumer ||= OAuth::Consumer.new("a", "b")
-  end
-
   describe "#initialize" do
     describe "when mutter_id == nil" do
       subject { Youroom::Entry.new(access_token, "room_id") }

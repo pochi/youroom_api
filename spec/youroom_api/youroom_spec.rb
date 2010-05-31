@@ -1,31 +1,6 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 describe Youroom::OAuth do
-
-  def access_token
-    @access_token ||= OAuth::AccessToken.new(consumer, "hoge", "hoge")
-  end
-
-  def consumer
-    @consumer ||= OAuth::Consumer.new("a", "b")
-  end
-
-  def create_room
-    @create_room ||= mock(Youroom::CreateRoom)
-  end
-
-  def create_user
-    @create_user ||= mock(Youroom::CreateUser)
-  end
-
-  def create_participation
-    @create_participation ||= mock(Youroom::CreateParticipation)
-  end
-
-  def destroy_participation
-    @destroy_participation ||= mock(Youroom::DestroyParticipation)
-  end
-
   describe "#initialize" do
     describe "when can create instance" do
       subject { Youroom::OAuth.new(access_token) }

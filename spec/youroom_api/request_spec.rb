@@ -1,34 +1,6 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 describe Youroom::Request do
-  def access_token
-    @access_token ||= OAuth::AccessToken.new(consumer, "hoge", "hoge")
-  end
-
-  def consumer
-    @consumer ||= OAuth::Consumer.new("a", "b")
-  end
-
-  def entry
-    @entry ||= mock(Youroom::Entry)
-  end
-
-  def participation
-    @participation ||= mock(Youroom::Participation)
-  end
-
-  def timeline
-    @timeline ||= mock(Youroom::HomeTimeline)
-  end
-
-  def unread_timeline
-    @timeline ||= mock(Youroom::UnreadTimeline)
-  end
-
-  def create_entry_request
-    @create_entry_request ||= mock(Youroom::PostEntry)
-  end
-
 
   describe "#initialize" do
     subject { Youroom::Request.new(access_token, "http://www.yahoo.co.jp") }
