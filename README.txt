@@ -1,6 +1,6 @@
 = youroom_api
 
-* http://sufg1ed2v/rubyforge/youroom_api
+* http://github.com/pochi/youroom_api
 
 == DESCRIPTION:
 
