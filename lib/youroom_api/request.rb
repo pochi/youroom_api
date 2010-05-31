@@ -31,7 +31,12 @@ module Youroom
       PostEntry.new(access_token, room_id, content, url).post
     end
 
+    def get_my_group
+      MyGroup.new(access_token, url).call
+    end
+
     def call
+      puts path
       access_token.get(path)
     end
 

@@ -71,4 +71,8 @@ Spec::Runner.configure do |config|
   def create_entry_request
     @create_entry_request ||= mock(Youroom::PostEntry)
   end
+
+  def create_my_group_request
+    @create_my_group_request ||= mock(Youroom::MyGroup)
+  end
 end

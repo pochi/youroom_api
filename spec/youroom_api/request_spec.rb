@@ -84,4 +84,16 @@ describe Youroom::Request do
     end
   end
 
+  describe "#get_my_group" do
+    before do
+      request = Youroom::Request.new(access_token)
+    end
+
+    it "should call Youroom:MyGroup.new" do
+      Youroom::MyGroup.should_receive(:new).and_return(create_my_group_request)
+      create_my_group_request.should_receive(:call)
+      Youroom::Request.new(access_token).get_my_group
+    end
+  end
+
 end
