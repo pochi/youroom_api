@@ -31,6 +31,10 @@ module Youroom
       PostEntry.new(access_token, room_id, content, url).post
     end
 
+    def destroy_entry(room_id, mutter_id)
+      DestroyEntry.new(access_token, room_id, mutter_id, url).delete
+    end
+
     def get_my_group
       MyGroup.new(access_token, url).call
     end
@@ -41,6 +45,10 @@ module Youroom
 
     def post
       access_token.post(path, params)
+    end
+
+    def delete
+      access_token.delete(path)
     end
   end
 end

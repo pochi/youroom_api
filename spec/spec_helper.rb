@@ -75,4 +75,8 @@ Spec::Runner.configure do |config|
   def create_my_group_request
     @create_my_group_request ||= mock(Youroom::MyGroup)
   end
+
+  def destroy_entry
+    @destroy_entry_request ||= mock(Youroom::DestroyEntry)
+  end
 end

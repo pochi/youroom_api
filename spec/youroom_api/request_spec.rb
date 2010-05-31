@@ -27,7 +27,7 @@ describe Youroom::Request do
       request = Youroom::Request.new(access_token)
     end
 
-    it "should call Entry.new" do
+    it "should call GetEntry.new" do
       Youroom::GetEntry.should_receive(:new).with(access_token, "room_id", "mutter_id", Youroom::BASE_URL).
                                                   and_return(entry)
       entry.should_receive(:call)
@@ -35,6 +35,17 @@ describe Youroom::Request do
     end
   end
 
+  describe "#destroy_entry(room_id, mutter_id" do
+    before do
+      request = Youroom::Request.new(access_token)
+    end
+
+    it "should call DestroyEntry.new" do
+      Youroom::DestroyEntry.should_receive(:new).and_return(destroy_entry)
+      destroy_entry.should_receive(:delete)
+      Youroom::Request.new(access_token).destroy_entry("room_id", "mutter_id")
+    end
+  end
 
   describe "#get_participation(room_id, participation_id)" do
     before do
