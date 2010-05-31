@@ -10,10 +10,10 @@ module Youroom
   autoload :Base, 'youroom_api/base'
   autoload :OAuth, 'youroom_api/youroom'
   autoload :Request, 'youroom_api/request'
-  autoload :Entry, 'youroom_api/entry'
-  autoload :Participation, 'youroom_api/participation'
-  autoload :HomeTimeline, 'youroom_api/timeline'
-  autoload :UnreadTimeline, 'youroom_api/unread_timeline'
-  autoload :PostEntry, 'youroom_api/post_entry'
+  autoload :Entry, 'youroom_api/request/entry'
+  autoload :Participation, 'youroom_api/request/participation'
+  autoload :HomeTimeline, 'youroom_api/request/timeline'
+  autoload :UnreadTimeline, 'youroom_api/request/unread_timeline'
+  autoload :PostEntry, 'youroom_api/request/post_entry'
 end
 
