@@ -39,11 +39,17 @@ module Youroom
       MyGroup.new(access_token, url).call
     end
 
+    def add_room(billing_id, name)
+      AddRoom.new(access_token, billing_id, name, url).post
+    end
+
     def call
       access_token.get(path)
     end
 
     def post
+      puts path
+      puts params
       access_token.post(path, params)
     end
 

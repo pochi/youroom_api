@@ -19,5 +19,11 @@ describe Hash do
       subject { @hash.optimize }
       it { should == {"a"=>"b", "b[c]"=>"3", "b[d]"=>"4"}}
     end
+
+    describe "case4: nested level is 2" do
+      before { @hash = {:a=> { :b => { :c => 1 } } } }
+      subject { @hash.optimize }
+      it { should == { 'a[b][c]' => "1" } }
+    end
   end
 end

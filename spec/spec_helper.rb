@@ -79,4 +79,8 @@ Spec::Runner.configure do |config|
   def destroy_entry
     @destroy_entry_request ||= mock(Youroom::DestroyEntry)
   end
+
+  def add_room_request
+    @add_room_request ||= mock(Youroom::AddRoom)
+  end
 end

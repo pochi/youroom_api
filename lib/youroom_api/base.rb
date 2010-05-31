@@ -12,5 +12,12 @@ module Youroom
       uri = URI.parse(url)
       @host, @port = uri.host, uri.port
     end
+
+    def enterprise_host
+      # production url
+      #"https://enterprise.youroom.in/"
+      # development url
+      "https://enterprise.youroom.sg/"
+    end
   end
 end

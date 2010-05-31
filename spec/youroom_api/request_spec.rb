@@ -107,4 +107,16 @@ describe Youroom::Request do
     end
   end
 
+  describe "#add_room" do
+    before do
+      request = Youroom::Request.new(access_token)
+    end
+
+    it "should call Youroom:AddRoom.new" do
+      Youroom::AddRoom.should_receive(:new).and_return(add_room_request)
+      add_room_request.should_receive(:post)
+      Youroom::Request.new(access_token).add_room(3, "new room")
+    end
+  end
+
 end
