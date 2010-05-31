@@ -9,12 +9,26 @@ module Youroom
       super(access_token, url)
     end
 
+    # Refactoring required
     def path
-      if !mutter_id.nil?
-        File.join(url, 'group', room_id, 'entries', mutter_id.to_s+'.json')
+      if url == BASE_URL
+        if !mutter_id.nil?
+          File.join(group_host, 'entries', mutter_id.to_s+'.json')
+        else
+          File.join(group_host, 'all?format=json')
+        end
       else
-        File.join(url, 'group', room_id, 'entries.json')
+        if !mutter_id.nil?
+          File.join(group_host, 'group', room_id, 'entries', mutter_id.to_s+'.json')
+        else
+          File.join(group_host, 'group', room_id, 'entries.json')
+        end
       end
     end
+
+    def group_host
+      url == BASE_URL ? "https://#{room_id}.youroom.in/" : url
+    end
+
   end
 end
