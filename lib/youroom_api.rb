@@ -24,5 +24,6 @@ module Youroom
 
   # relation room
   autoload :AddRoom, 'youroom_api/request/add_room'
+  autoload :GetRoomList, 'youroom_api/request/get_room_list'
 end
 

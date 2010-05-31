@@ -1,6 +1,3 @@
-require 'net/http'
-require 'uri'
-
 module Youroom
   class Request < Base
     attr_reader :access_token
@@ -39,8 +36,12 @@ module Youroom
       MyGroup.new(access_token, url).call
     end
 
-    def add_room(billing_id, name)
+    def create_room(billing_id, name)
       AddRoom.new(access_token, billing_id, name, url).post
+    end
+
+    def get_room_list(billing_id)
+      GetRoomList.new(access_token, billing_id, url).call
     end
 
     def call
@@ -48,8 +49,6 @@ module Youroom
     end
 
     def post
-      puts path
-      puts params
       access_token.post(path, params)
     end
 

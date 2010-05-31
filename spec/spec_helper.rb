@@ -83,4 +83,8 @@ Spec::Runner.configure do |config|
   def add_room_request
     @add_room_request ||= mock(Youroom::AddRoom)
   end
+
+  def room_list_request
+    @get_room_list ||= mock(Youroom::GetRoomList)
+  end
 end
