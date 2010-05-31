@@ -130,4 +130,17 @@ describe Youroom::Request do
       Youroom::Request.new(access_token).get_room_list("3")
     end
   end
+
+  describe "#create_participation" do
+    before do
+      request = Youroom::Request.new(access_token)
+    end
+
+    it "should call Youroom:AddParticipation.new" do
+      Youroom::AddParticipation.should_receive(:new).and_return(add_participation_request)
+      add_participation_request.should_receive(:post)
+      Youroom::Request.new(access_token).create_participation("3", "4", "pochi.black@gmail.com")
+    end
+  end
+
 end

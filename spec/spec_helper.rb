@@ -87,4 +87,8 @@ Spec::Runner.configure do |config|
   def room_list_request
     @get_room_list ||= mock(Youroom::GetRoomList)
   end
+
+  def add_participation_request
+    @add_participation_request ||= mock(Youroom::AddParticipation)
+  end
 end

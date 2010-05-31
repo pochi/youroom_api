@@ -40,6 +40,10 @@ module Youroom
       AddRoom.new(access_token, billing_id, name, url).post
     end
 
+    def create_participation(billing_id, billin_group_id, email)
+      AddParticipation.new(access_token, billing_id, billin_group_id, email, url).post
+    end
+
     def get_room_list(billing_id)
       GetRoomList.new(access_token, billing_id, url).call
     end
@@ -49,6 +53,8 @@ module Youroom
     end
 
     def post
+      puts path
+      puts params.inspect
       access_token.post(path, params)
     end
 
