@@ -56,7 +56,7 @@ describe Youroom::DestroyEntry do
       end
 
       subject { @client.path }
-      it { should == "http://localhost:8083/youroom/enterprise/billings/3/billing_groups/4/participations/add?format=json"}
+      it { should == File.join(WW_URL, 'enterprise', 'billings', '3', 'billing_groups', '4', 'participations', 'add?format=json')}
     end
   end
 

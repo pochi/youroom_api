@@ -17,7 +17,7 @@ describe Youroom::Entry do
       end
 
       subject { @client.send(:group_host) }
-      it { should == "http://localhost:8083/youroom/" }
+      it { should == WW_URL }
     end
   end
 end

@@ -33,7 +33,7 @@ describe Youroom::Participation do
     end
 
     subject { @participation.path }
-    it { should == "http://localhost:8083/youroom/group/room_id/participations/participation_id.json" }
+    it { should == File.join(WW_URL, 'group', 'room_id', 'participations', 'participation_id.json') }
   end
 
 end

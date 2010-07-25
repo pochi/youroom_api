@@ -17,7 +17,7 @@ describe Youroom::MyGroup do
       end
 
       subject { @client.path }
-      it { should == "http://localhost:8083/youroom/groups/my?format=json"}
+      it { should == File.join(WW_URL, 'groups', 'my?format=json') }
     end
   end
 

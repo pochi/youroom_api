@@ -42,7 +42,7 @@ describe Youroom::DestroyEntry do
       end
 
       subject { @client.path }
-      it { should == "http://localhost:8083/youroom/group/room_id/entries/1111?format=json"}
+      it { should == File.join(WW_URL, 'group', 'room_id', 'entries', '1111?format=json') }
     end
   end
 

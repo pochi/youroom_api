@@ -17,7 +17,7 @@ describe Youroom::UnreadTimeline do
       end
 
       subject { @client.path }
-      it { should == "http://localhost:8083/youroom/home/unreads?format=json"}
+      it { should == File.join(WW_URL, 'home', 'unreads?format=json') }
     end
   end
 
