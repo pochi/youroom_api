@@ -1,10 +1,6 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 describe Youroom::Participation do
-  before do
-    @url = "https://home.youroom.in/"
-  end
-
   describe "#initialize" do
     describe "when can not create instanse" do
       before do
@@ -25,7 +21,7 @@ describe Youroom::Participation do
     describe "when can create user instance" do
       subject { Youroom::Participation.new(access_token, "room_id", "participation_id") }
       it { should be_a(Youroom::Participation) }
-      its(:url) { should == @url }
+      its(:url) { should == Youroom::BASE_URL }
       its(:room_id) { should == "room_id" }
       its(:participation_id) { should == "participation_id" }
     end

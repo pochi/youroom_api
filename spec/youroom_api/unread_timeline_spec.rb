@@ -1,10 +1,6 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 describe Youroom::UnreadTimeline do
-  before do
-    @url = "https://home.youroom.in/"
-  end
-
   describe "#path" do
     describe "when url is original" do
       before do
@@ -12,7 +8,7 @@ describe Youroom::UnreadTimeline do
       end
 
       subject { @client.path }
-      it { should == "https://home.youroom.in/unreads?format=json"}
+      it { should == File.join(Youroom::BASE_URL, 'unreads?format=json')}
     end
 
     describe "when url is not original" do
