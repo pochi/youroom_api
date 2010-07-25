@@ -10,7 +10,7 @@ module Youroom
 
     def path
       if url == BASE_URL
-        File.join(enterprise_host, 'billings', billing_id, 'billing_groups?format=json')
+        File.join(::Youroom::ENTERPRISE_HOST, 'billings', billing_id, 'billing_groups?format=json')
       else
         File.join(url, 'enterprise', 'billings', billing_id, 'billing_groups?format=json')
       end

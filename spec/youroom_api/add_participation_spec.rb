@@ -47,7 +47,7 @@ describe Youroom::DestroyEntry do
       end
 
       subject { @client.path }
-      it { should == "https://enterprise.youroom.in/billings/3/billing_groups/4/participations/add?format=json"}
+      it { should == File.join(::Youroom::ENTERPRISE_HOST, 'billings', '3', 'billing_groups', '4', 'participations', 'add?format=json') }
     end
 
     describe "when url is customized" do
