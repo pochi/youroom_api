@@ -11,18 +11,10 @@ module Youroom
 
     # Refactoring required
     def path
-      if url == BASE_URL
-        if !mutter_id.nil?
-          File.join(group_host, 'entries', mutter_id.to_s+'.json')
-        else
-          File.join(group_host, 'all?format=json')
-        end
+      if !mutter_id.nil?
+        File.join(url, 'r', room_id, 'entries', mutter_id.to_s+'.json')
       else
-        if !mutter_id.nil?
-          File.join(group_host, 'group', room_id, 'entries', mutter_id.to_s+'.json')
-        else
-          File.join(group_host, 'group', room_id, 'entries.json')
-        end
+        File.join(url, 'r', room_id, 'all?format=json')
       end
     end
   end

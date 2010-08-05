@@ -43,7 +43,7 @@ describe Youroom::GetEntry do
         end
 
         subject { @client.path }
-        it { should == "https://room_id.youroom.in/all?format=json"}
+        it { should == File.join(@client.url, 'r', 'room_id', 'all?format=json') }
       end
 
       describe "when mutter_id != nil" do
@@ -52,7 +52,7 @@ describe Youroom::GetEntry do
         end
 
         subject { @client.path }
-        it { should == "https://room_id.youroom.in/entries/1111.json"}
+        it { should == File.join(@client.url, 'r', 'room_id', 'entries', '1111.json') }
       end
     end
 
@@ -63,7 +63,7 @@ describe Youroom::GetEntry do
         end
 
         subject { @client.path }
-        it { should == File.join(WW_URL, 'group', 'room_id', 'entries.json') }
+        it { should == File.join(@client.url, 'r', 'room_id', 'all?format=json') }
       end
 
       describe "when mutter_id != nil" do
@@ -72,7 +72,7 @@ describe Youroom::GetEntry do
         end
 
         subject { @client.path }
-        it { should == File.join(WW_URL, 'group', 'room_id', 'entries', '1111.json')}
+        it { should == File.join(@client.url, 'r', 'room_id', 'entries', '1111.json')}
       end
     end
   end

@@ -9,11 +9,7 @@ module Youroom
     end
 
     def path
-      if url == BASE_URL
-        File.join(group_host, 'entries?format=json')
-      else
-        File.join(group_host, 'group', room_id, 'entries?format=json')
-      end
+      File.join(url, 'r', room_id, 'entries?format=json')
     end
 
     def params

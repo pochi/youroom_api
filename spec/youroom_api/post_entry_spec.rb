@@ -33,7 +33,7 @@ describe Youroom::PostEntry do
       end
 
       subject { @client.path }
-      it { should == "https://room_id.youroom.in/entries?format=json"}
+      it { should == File.join(@client.url, 'r', 'room_id', 'entries?format=json') }
     end
 
     describe "when url is not original" do
@@ -42,14 +42,14 @@ describe Youroom::PostEntry do
       end
 
       subject { @client.path }
-      it { should == File.join(WW_URL, 'group', 'room_id', 'entries?format=json') }
+      it { should == File.join(@client.url, 'r', 'room_id', 'entries?format=json') }
     end
   end
 
   describe "#post" do
     before do
       @client = Youroom::PostEntry.new(access_token, "room_id", "hogehoge", WW_URL)
-      WW::Server.mock(:youroom).post("/youroom/group/room_id/entries") do
+      WW::Server.mock(:youroom).post("/youroom/r/room_id/entries") do
         { :status => "Created" }.to_json
       end
     end

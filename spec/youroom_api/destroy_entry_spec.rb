@@ -33,7 +33,7 @@ describe Youroom::DestroyEntry do
       end
 
       subject { @client.path }
-      it { should == "https://room_id.youroom.in/entries/1111?format=json"}
+      it { should == File.join(@client.url, 'r', 'room_id', 'entries', '1111?format=json') }
     end
 
     describe "when url is not original" do
@@ -42,14 +42,14 @@ describe Youroom::DestroyEntry do
       end
 
       subject { @client.path }
-      it { should == File.join(WW_URL, 'group', 'room_id', 'entries', '1111?format=json') }
+      it { should == File.join(@client.url, 'r', 'room_id', 'entries', '1111?format=json') }
     end
   end
 
   describe "#delete" do
     before do
       @client = Youroom::DestroyEntry.new(access_token, "room_id", 1111, WW_URL)
-      WW::Server.mock(:youroom).delete("/youroom/group/room_id/entries/1111") do
+      WW::Server.mock(:youroom).delete("/youroom/r/room_id/entries/1111") do
         { :status => "Destroy" }.to_json
       end
     end
