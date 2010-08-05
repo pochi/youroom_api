@@ -10,10 +10,6 @@ describe Youroom::Request do
   end
 
   describe "#get_entry(room_id)" do
-    before do
-      request = Youroom::Request.new(access_token)
-    end
-
     it "should call GetEntry.new" do
       Youroom::GetEntry.should_receive(:new).with(access_token, "room_id", nil, Youroom::BASE_URL).
                                              and_return(entry)
@@ -23,10 +19,6 @@ describe Youroom::Request do
   end
 
   describe "#get_entry(room_id, mutter_id)" do
-    before do
-      request = Youroom::Request.new(access_token)
-    end
-
     it "should call GetEntry.new" do
       Youroom::GetEntry.should_receive(:new).with(access_token, "room_id", "mutter_id", Youroom::BASE_URL).
                                                   and_return(entry)
@@ -36,10 +28,6 @@ describe Youroom::Request do
   end
 
   describe "#destroy_entry(room_id, mutter_id" do
-    before do
-      request = Youroom::Request.new(access_token)
-    end
-
     it "should call DestroyEntry.new" do
       Youroom::DestroyEntry.should_receive(:new).and_return(destroy_entry)
       destroy_entry.should_receive(:delete)
@@ -48,10 +36,6 @@ describe Youroom::Request do
   end
 
   describe "#get_participation(room_id, participation_id)" do
-    before do
-      request = Youroom::Request.new(access_token)
-    end
-
     it "should call Participation.new" do
       Youroom::Participation.should_receive(:new).and_return(participation)
       participation.should_receive(:call)
@@ -60,10 +44,6 @@ describe Youroom::Request do
   end
 
   describe "#get_all_timeline" do
-    before do
-      request = Youroom::Request.new(access_token)
-    end
-
     it "should call Youroom:TimeLine.new" do
       Youroom::HomeTimeline.should_receive(:new).and_return(timeline)
       timeline.should_receive(:call)
@@ -72,10 +52,6 @@ describe Youroom::Request do
   end
 
   describe "#get_unread_timeline" do
-    before do
-      request = Youroom::Request.new(access_token)
-    end
-
     it "should call Youroom:TimeLine.new" do
       Youroom::UnreadTimeline.should_receive(:new).and_return(unread_timeline)
       unread_timeline.should_receive(:call)
@@ -84,10 +60,6 @@ describe Youroom::Request do
   end
 
   describe "#post_entry(room_id, content)" do
-    before do
-      request = Youroom::Request.new(access_token)
-    end
-
     it "should call Youroom:TimeLine.new" do
       Youroom::PostEntry.should_receive(:new).and_return(create_entry_request)
       create_entry_request.should_receive(:post)
@@ -96,10 +68,6 @@ describe Youroom::Request do
   end
 
   describe "#get_my_group" do
-    before do
-      request = Youroom::Request.new(access_token)
-    end
-
     it "should call Youroom:MyGroup.new" do
       Youroom::MyGroup.should_receive(:new).and_return(create_my_group_request)
       create_my_group_request.should_receive(:call)
@@ -108,10 +76,6 @@ describe Youroom::Request do
   end
 
   describe "#create_room" do
-    before do
-      request = Youroom::Request.new(access_token)
-    end
-
     it "should call Youroom:AddRoom.new" do
       Youroom::AddRoom.should_receive(:new).and_return(add_room_request)
       add_room_request.should_receive(:post)
@@ -120,10 +84,6 @@ describe Youroom::Request do
   end
 
   describe "#get_room_list" do
-    before do
-      request = Youroom::Request.new(access_token)
-    end
-
     it "should call Youroom:GetRoomList.new" do
       Youroom::GetRoomList.should_receive(:new).and_return(room_list_request)
       room_list_request.should_receive(:call)
@@ -132,10 +92,6 @@ describe Youroom::Request do
   end
 
   describe "#create_participation" do
-    before do
-      request = Youroom::Request.new(access_token)
-    end
-
     it "should call Youroom:AddParticipation.new" do
       Youroom::AddParticipation.should_receive(:new).and_return(add_participation_request)
       add_participation_request.should_receive(:post)
@@ -144,10 +100,6 @@ describe Youroom::Request do
   end
 
   describe "#destoy_participation" do
-    before do
-      request = Youroom::Request.new(access_token)
-    end
-
     it "should call Youroom:DestroyParticipation.new" do
       Youroom::DestroyParticipation.should_receive(:new).and_return(destroy_participation_request)
       destroy_participation_request.should_receive(:delete)
