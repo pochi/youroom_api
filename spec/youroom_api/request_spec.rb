@@ -107,4 +107,12 @@ describe Youroom::Request do
     end
   end
 
+  describe "#create_user" do
+    it "should call Youroom::AddUser.new" do
+      Youroom::AddUser.should_receive(:new).and_return(add_user_request)
+      add_user_request.should_receive(:post)
+      Youroom::Request.new(access_token).create_user("3", user_params)
+    end
+  end
 end
+

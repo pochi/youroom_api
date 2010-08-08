@@ -52,6 +52,10 @@ module Youroom
       GetRoomList.new(access_token, billing_id, url).call
     end
 
+    def create_user(billing_id, user)
+      AddUser.new(access_token, billing_id, user, url).post
+    end
+
     def call
       access_token.get(path)
     end

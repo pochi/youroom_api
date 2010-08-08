@@ -95,4 +95,15 @@ Spec::Runner.configure do |config|
   def destroy_participation_request
     @destroy_participation_request ||= mock(Youroom::DestroyParticipation)
   end
+
+  def add_user_request
+    @add_user_request ||= mock(Youroom::AddUser)
+  end
+
+  def user_params
+    { :name => 'new user',
+      :email => 'pochi.black@gmail.com',
+      :password => 'hogehoge',
+      :password_confirmation => 'hogehoge' }
+  end
 end

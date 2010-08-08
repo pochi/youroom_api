@@ -1,16 +1,9 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 describe Youroom::AddUser do
-  before do
-    @user_params = { :name => 'new user',
-                     :email => 'pochi.black@gmail.com',
-                     :password => 'hogehoge',
-                     :password_confirmation => 'hogehoge' }
-  end
-
   describe "#initialize" do
     describe "when can create instance" do
-      subject { Youroom::AddUser.new(access_token, 3, @user_params) }
+      subject { Youroom::AddUser.new(access_token, 3, user_params) }
       it { should be_a(Youroom::AddUser) }
       its(:url) { should == Youroom::BASE_URL }
       its(:name) { should == 'new user' }
@@ -31,7 +24,7 @@ describe Youroom::AddUser do
   describe "#path" do
     describe "when url is default" do
       before do
-        @client = Youroom::AddUser.new(access_token, 3, @user_params)
+        @client = Youroom::AddUser.new(access_token, 3, user_params)
       end
 
       subject { @client.path }
@@ -40,7 +33,7 @@ describe Youroom::AddUser do
 
     describe "when url is customized" do
       before do
-        @client = Youroom::AddUser.new(access_token, 3, @user_params, WW_URL)
+        @client = Youroom::AddUser.new(access_token, 3, user_params, WW_URL)
       end
 
       subject { @client.path }
@@ -50,7 +43,7 @@ describe Youroom::AddUser do
 
   describe "#params" do
     before do
-      @client = Youroom::AddUser.new(access_token, 3, @user_params)
+      @client = Youroom::AddUser.new(access_token, 3, user_params)
     end
 
     subject { @client.params }
@@ -64,7 +57,7 @@ describe Youroom::AddUser do
 
   describe "#post" do
     before do
-      @client = Youroom::AddUser.new(access_token, 3, @user_params, WW_URL)
+      @client = Youroom::AddUser.new(access_token, 3, user_params, WW_URL)
       WW::Server.mock(:youroom).post("/youroom/billings/3/billing_users") do
         { :status => "Created" }.to_json
       end
