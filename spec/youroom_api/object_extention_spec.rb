@@ -25,5 +25,41 @@ describe Hash do
       subject { @hash.optimize }
       it { should == { 'a[b][c]' => "1" } }
     end
+
+    describe "case5: nested level is 2 and has many elements in hash" do
+      before do
+        @hash = {:a=> 1,
+                 :b=> {:c => 2,
+                       :d => {:e => 3,
+                              :f => 4,
+                              :g => 5 }}}
+      end
+
+      subject { @hash.optimize }
+      it do
+        should == {'a' => '1',
+                   'b[c]' => '2',
+                   'b[d][e]' => '3',
+                   'b[d][f]' => '4',
+                   'b[d][g]' => '5' }
+      end
+    end
+
+    describe "case6: nested level is 2 and has many elements in hash" do
+      before do
+        @hash = { :billing_user => { :name => "moge",
+                                     :user_attributes => { :email => "hoge@gmail.com",
+                                                           :password => "hogehoge",
+                                                           :password_confirmation => "hogehoge" }}}
+      end
+
+      subject { @hash.optimize }
+      it do
+        should == {'billing_user[name]' => 'moge',
+                   'billing_user[user_attributes][email]' => 'hoge@gmail.com',
+                   'billing_user[user_attributes][password]' => 'hogehoge',
+                   'billing_user[user_attributes][password_confirmation]' => 'hogehoge' }
+      end
+    end
   end
 end

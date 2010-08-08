@@ -25,7 +25,7 @@ describe Youroom::DestroyEntry do
       end
 
       subject { @client.path }
-      it { should == File.join(Youroom::ENTERPRISE_HOST, 'billings', '3', 'billing_groups?format=json') }
+      it { should == File.join(@client.url, 'billings', '3', 'billing_groups?format=json') }
     end
 
     describe "when url is customized" do
@@ -34,7 +34,7 @@ describe Youroom::DestroyEntry do
       end
 
       subject { @client.path }
-      it { should == File.join(WW_URL, 'enterprise', 'billings', '3', 'billing_groups?format=json') }
+      it { should == File.join(@client.url, 'billings', '3', 'billing_groups?format=json') }
     end
   end
 
@@ -50,7 +50,7 @@ describe Youroom::DestroyEntry do
   describe "#post" do
     before do
       @client = Youroom::AddRoom.new(access_token, 3, "hogehoge", WW_URL)
-      WW::Server.mock(:youroom).post("/youroom/enterprise/billings/3/billing_groups") do
+      WW::Server.mock(:youroom).post("/youroom/billings/3/billing_groups") do
         { :status => "Created" }.to_json
       end
     end

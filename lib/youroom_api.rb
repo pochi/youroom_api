@@ -27,6 +27,10 @@ module Youroom
   autoload :AddRoom, 'youroom_api/request/add_room' # enterprise only
   autoload :GetRoomList, 'youroom_api/request/get_room_list' # enterprise only
 
+  # relation user
+  autoload :AddUser, 'youroom_api/request/add_user' # enterprise only
+  autoload :GetUserList, 'youroom_api/request/get_user_list' # enterprise only
+
   # relation participation
   autoload :Participation, 'youroom_api/request/participation'
   autoload :AddParticipation, 'youroom_api/request/add_participation' # enterprise only
