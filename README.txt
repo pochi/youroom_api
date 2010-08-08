@@ -20,6 +20,8 @@ Each api follow:
   Enterprise:Group/index           ---->     get_room_list(billing_id)
   Enterprise:Participation/add     ---->     create_participation(billing_id, billing_group_id, email)
   Enterprise:Participation/remove  ---->     create_participation(billing_id, billing_group_id, email)
+  Enterprise:User/create           ---->     create_user(billing_id, user_params)
+  Enterprise:User/index            ---->     get_user_list(billing_id)
   REST:Entry/create                ---->     post_entry(room_id, content)
   REST:Entry/destroy               ---->     destroy_entry(room_id, mutter_id)
   REST:Entry/show                  ---->     get_entry(room_id, mutter_id)
@@ -35,7 +37,7 @@ sample1: Get my timeline
 require 'rubygems'
 require 'youroom_api'
 
-YOUROOM_URL = "https://api.youroom.in/"
+YOUROOM_URL = "https://www.youroom.in/"
 
 consumer = OAuth::Consumer.new(consumer_key,
                                consumer_sercret,
