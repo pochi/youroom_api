@@ -35,7 +35,7 @@ describe Youroom::MyGroup do
       WW::Server.verify(:youroom)
     end
 
-    subject { @client.call }
+    subject { @client.get }
     it "should call request url" do
       should be_a_instance_of(Net::HTTPOK)
     end

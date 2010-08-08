@@ -9,19 +9,19 @@ module Youroom
     end
 
     def get_entry(room_id, mutter_id=nil)
-      GetEntry.new(access_token, room_id, mutter_id, url).call
+      GetEntry.new(access_token, room_id, mutter_id, url).get
     end
 
     def get_participation(room_id, participation_id)
-      Participation.new(access_token, room_id, participation_id, url).call
+      Participation.new(access_token, room_id, participation_id, url).get
     end
 
     def get_all_timeline
-      HomeTimeline.new(access_token, url).call
+      HomeTimeline.new(access_token, url).get
     end
 
     def get_unread_timeline
-      UnreadTimeline.new(access_token, url).call
+      UnreadTimeline.new(access_token, url).get
     end
 
     def post_entry(room_id, content)
@@ -33,7 +33,7 @@ module Youroom
     end
 
     def get_my_group
-      MyGroup.new(access_token, url).call
+      MyGroup.new(access_token, url).get
     end
 
     def create_room(billing_id, name)
@@ -49,7 +49,7 @@ module Youroom
     end
 
     def get_room_list(billing_id)
-      GetRoomList.new(access_token, billing_id, url).call
+      GetRoomList.new(access_token, billing_id, url).get
     end
 
     def create_user(billing_id, user)
@@ -57,10 +57,10 @@ module Youroom
     end
 
     def get_user_list(billing_id)
-      GetUserList.new(access_token, billing_id, url).call
+      GetUserList.new(access_token, billing_id, url).get
     end
 
-    def call
+    def get
       access_token.get(path)
     end
 

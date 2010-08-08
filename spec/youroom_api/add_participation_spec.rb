@@ -82,7 +82,7 @@ describe Youroom::DestroyEntry do
     end
 
     subject { @client.post }
-    it "should call request url" do
+    it "should get request url" do
       should be_a_instance_of(Net::HTTPOK)
     end
   end
