@@ -53,7 +53,9 @@ access_token = OAuth::AccessToken.new(consumer,
                                       info.params['oauth_token_secret'])
 
 client = Youroom::Request.new(access_token)
-puts client.get_all_timeline.body
+client.get_all_timeline.each do |topic|
+  puts topic["entry"]["content"]
+end
 
 == SYNOPSIS:
 
