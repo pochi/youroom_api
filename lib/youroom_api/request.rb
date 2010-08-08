@@ -61,15 +61,15 @@ module Youroom
     end
 
     def get
-      access_token.get(path)
+      JSON.parse(access_token.get(path).body)
     end
 
     def post
-      access_token.post(path, params)
+      JSON.parse(access_token.post(path, params).body)
     end
 
     def delete
-      access_token.delete(path)
+      JSON.parse(access_token.delete(path).body)
     end
   end
 end

@@ -9,7 +9,7 @@ describe Youroom::HomeTimeline do
 
       subject { @client.path }
 
-      it { should == File.join(Youroom::BASE_URL, 'all?format=json') }
+      it { should == File.join(@client.url, 'all?format=json') }
     end
 
     describe "when url is not original" do
@@ -18,7 +18,7 @@ describe Youroom::HomeTimeline do
       end
 
       subject { @client.path }
-      it { should == "http://localhost:8083/youroom/home/all?format=json"}
+      it { should == File.join(@client.url, 'all?format=json')}
     end
   end
 
@@ -26,7 +26,7 @@ describe Youroom::HomeTimeline do
     before do
       @client = Youroom::HomeTimeline.new(access_token, WW_URL)
       # dammy ww url
-      @client.should_receive(:path).and_return("http://localhost:8083/all?format=json")
+      @client.should_receive(:path).at_least(1).and_return("http://localhost:8083/all?format=json")
 
       # NOTICE: WW not check params
       WW::Server.mock(:youroom, { :format => "json"} ).get("/all") do
@@ -40,7 +40,7 @@ describe Youroom::HomeTimeline do
 
     subject { @client.get }
     it "should call request url" do
-      should be_a_instance_of(Net::HTTPOK)
+      should be_a_instance_of(Hash)
     end
   end
 

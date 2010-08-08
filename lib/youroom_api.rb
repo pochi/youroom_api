@@ -3,6 +3,7 @@ require "object_extention"
 require "oauth"
 require 'uri'
 require 'net/http'
+require 'json'
 
 module Youroom
   # base

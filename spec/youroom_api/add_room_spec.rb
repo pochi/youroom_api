@@ -1,6 +1,6 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
-describe Youroom::DestroyEntry do
+describe Youroom::AddRoom do
   describe "#initialize" do
     describe "when can create instance" do
       subject { Youroom::AddRoom.new(access_token, 3, "new room") }
@@ -61,7 +61,7 @@ describe Youroom::DestroyEntry do
 
     subject { @client.post }
     it "should call request url" do
-      should be_a_instance_of(Net::HTTPOK)
+      should be_a_instance_of(Hash)
     end
   end
 end

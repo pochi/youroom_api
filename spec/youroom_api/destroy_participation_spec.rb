@@ -1,6 +1,6 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
-describe Youroom::DestroyEntry do
+describe Youroom::Participation do
   describe "#initialize" do
     describe "when can create instance" do
       subject { Youroom::DestroyParticipation.new(access_token, 3, 4, "pochi.black@gmail.com") }
@@ -83,7 +83,7 @@ describe Youroom::DestroyEntry do
 
     subject { @client.post }
     it "should call request url" do
-      should be_a_instance_of(Net::HTTPOK)
+      should be_a_instance_of(Hash)
     end
   end
 end

@@ -37,7 +37,7 @@ describe Youroom::MyGroup do
 
     subject { @client.get }
     it "should call request url" do
-      should be_a_instance_of(Net::HTTPOK)
+      should be_a_instance_of(Hash)
     end
   end
 
