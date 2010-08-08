@@ -1,5 +1,5 @@
 module Youroom
-  class GetRoomList < Request
+  class GetUserList < Request
     attr_reader :billing_id
 
     def initialize(access_token, billing_id, url=BASE_URL)
@@ -9,7 +9,7 @@ module Youroom
     end
 
     def path
-      File.join(url, 'billings', billing_id, 'billing_groups?format=json')
+      File.join(url, 'billings', billing_id, 'billing_users?format=json')
     end
   end
 end

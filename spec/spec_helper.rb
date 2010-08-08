@@ -100,6 +100,10 @@ Spec::Runner.configure do |config|
     @add_user_request ||= mock(Youroom::AddUser)
   end
 
+  def get_user_list_request
+    @get_user_list_request ||= mock(Youroom::GetUserList)
+  end
+
   def user_params
     { :name => 'new user',
       :email => 'pochi.black@gmail.com',

@@ -9,11 +9,6 @@ module Youroom
       super(access_token, url)
     end
 
-    # TODO: refactoring
-    def method_missing(name, *args)
-      attributes[name.to_sym]
-    end
-
     def path
       File.join(url, 'billings', billing_id, 'billing_users?format=json')
     end
@@ -23,6 +18,11 @@ module Youroom
                            :user_attributes => { :email => email,
                                                  :password => password,
                                                  :password_confirmation => password_confirmation }}}.optimize
+    end
+
+    # TODO: refactoring
+    def method_missing(name, *args)
+      attributes[name.to_sym]
     end
   end
 end

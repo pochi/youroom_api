@@ -114,5 +114,13 @@ describe Youroom::Request do
       Youroom::Request.new(access_token).create_user("3", user_params)
     end
   end
+
+  describe "#get_user_list" do
+    it "should call Youroom::GetUserList" do
+      Youroom::GetUserList.should_receive(:new).and_return(get_user_list_request)
+      get_user_list_request.should_receive(:call)
+      Youroom::Request.new(access_token).get_user_list("3")
+    end
+  end
 end
 
