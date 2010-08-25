@@ -47,7 +47,7 @@ describe Youroom::Participation do
       end
 
       subject { @client.path }
-      it { should == File.join(::Youroom::ENTERPRISE_HOST, 'billings', '3', 'billing_groups', '4', 'participations', 'remove?format=json') }
+      it { should == File.join(::Youroom::BASE_URL, 'billings', '3', 'billing_groups', '4', 'participations', 'remove?format=json') }
     end
 
     describe "when url is customized" do
