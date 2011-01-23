@@ -2,7 +2,7 @@ module Youroom
   class PostEntry < Entry
     attr_reader :room_id, :content, :parent_id
 
-    def initialize(access_token, room_id, content, parent_id, url=BASE_URL)
+    def initialize(access_token, room_id, content, parent_id=nil, url=BASE_URL)
       [room_id, content].each { |arg| required_structure(arg, String, Symbol) }
       @room_id, @content, @parent_id = room_id, content, parent_id
       super(access_token, url)
@@ -13,7 +13,11 @@ module Youroom
     end
 
     def params
-      { :entry => { :content => content, :parent_id => parent_id }, :insert_mention => "" }.optimize
+      if parent_id
+        { :entry => { :content => content, :parent_id => parent_id }, :insert_mention => "" }
+      else
+        { :entry => { :content => content }, :insert_mention => "" }
+      end.optimize
     end
   end
 end
