@@ -1,3 +1,4 @@
+# encoding: utf-8
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 describe Youroom::GetEntry do
@@ -20,14 +21,15 @@ describe Youroom::GetEntry do
       its(:access_token) { should == access_token }
     end
 
-    describe "when can't create instance" do
-      describe "case1: room_id is not either String or Symbol" do
-        it "should raise ArgumentError" do
-          lambda { Youroom::GetEntry.new(access_token, 100) }.should raise_exception(ArgumentError)
-        end
+    describe "room_idにFixnumクラスを設定した場合" do
+      subject { Youroom::GetEntry.new(access_token, 1000, "mutter_id") }
+      it "room_idに1000が設定されること" do
+        subject.room_id.should == 1000
       end
+    end
 
-      describe "case2: mutter_id is not either String or Symbol or Integer" do
+    describe "when can't create instance" do
+      describe "case1: mutter_id is not either String or Symbol or Integer" do
         it "should raise ArgumentError" do
           lambda { Youroom::GetEntry.new(access_token, "room_id", [2]) }.should raise_exception(ArgumentError)
         end
