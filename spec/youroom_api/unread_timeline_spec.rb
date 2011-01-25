@@ -8,7 +8,7 @@ describe Youroom::UnreadTimeline do
       end
 
       subject { @client.path }
-      it { should == File.join(Youroom::BASE_URL, 'unreads?format=json')}
+      it { should == File.join(Youroom::BASE_URL, '?format=json&read_state=unread')}
     end
 
     describe "when url is not original" do
@@ -17,14 +17,14 @@ describe Youroom::UnreadTimeline do
       end
 
       subject { @client.path }
-      it { should == File.join(WW_URL, 'home', 'unreads?format=json') }
+      it { should == File.join(WW_URL, 'home', '?format=json&read_state=unread') }
     end
   end
 
   describe "#call" do
     before do
       @client = Youroom::UnreadTimeline.new(access_token, WW_URL)
-      WW::Server.mock(:youroom, { :format => "json" }).get("/youroom/home/unreads") do
+      WW::Server.mock(:youroom, { :format => "json", :read_state => "unread" }).get("/youroom/home/") do
         { :entry => "hogehoge" }.to_json
       end
     end
