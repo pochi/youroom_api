@@ -35,14 +35,6 @@ describe Youroom::Request do
     end
   end
 
-  describe "#get_participation(room_id, participation_id)" do
-    it "should get Participation.new" do
-      Youroom::Participation.should_receive(:new).and_return(participation)
-      participation.should_receive(:get)
-      Youroom::Request.new(access_token).get_participation("room_id", "participation_id")
-    end
-  end
-
   describe "#get_all_timeline" do
     it "should get Youroom:TimeLine.new" do
       Youroom::HomeTimeline.should_receive(:new).and_return(timeline)

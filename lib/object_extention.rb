@@ -47,5 +47,6 @@ class Hash
 
     singleton_hash
   end
-
 end
+
+

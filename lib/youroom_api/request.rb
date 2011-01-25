@@ -12,10 +12,6 @@ module Youroom
       GetEntry.new(access_token, room_id, mutter_id, url).get
     end
 
-    def get_participation(room_id, participation_id)
-      Participation.new(access_token, room_id, participation_id, url).get
-    end
-
     def get_all_timeline
       HomeTimeline.new(access_token, url).get
     end
