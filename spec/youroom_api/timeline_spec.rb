@@ -9,7 +9,7 @@ describe Youroom::HomeTimeline do
 
       subject { @client.path }
 
-      it { should == File.join(@client.url, 'all?format=json') }
+      it { should == File.join(@client.url, '?format=json') }
     end
 
     describe "when url is not original" do
@@ -18,7 +18,7 @@ describe Youroom::HomeTimeline do
       end
 
       subject { @client.path }
-      it { should == File.join(@client.url, 'all?format=json')}
+      it { should == File.join(@client.url, '?format=json')}
     end
   end
 

@@ -1,6 +1,10 @@
 $KCODE= 'u'
 require 'rubygems'
-require 'spec'
+begin
+  require 'spec'
+rescue LoadError
+  require 'rspec'
+end
 require 'ww'
 require 'json'
 
