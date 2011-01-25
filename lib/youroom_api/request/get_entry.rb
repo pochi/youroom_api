@@ -12,9 +12,9 @@ module Youroom
     # Refactoring required
     def path
       if !mutter_id.nil?
-        File.join(url, 'r', room_id, 'entries', mutter_id.to_s+'.json')
+        File.join(url, 'r', room_id.to_s, 'entries', mutter_id.to_s+'.json')
       else
-        File.join(url, 'r', room_id, 'all?format=json')
+        File.join(url, 'r', room_id.to_s, 'all?format=json')
       end
     end
   end
