@@ -15,7 +15,7 @@ demo_open_room_id = 1719
 demo_open_entry_id = 231979
 
 consumer = OAuth::Consumer.new(consumer_key,
-                               consumer_secret,
+                               consumer_token,
                                :site => url)
 
 access_token = consumer.get_access_token(nil, {}, {

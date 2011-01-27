@@ -72,6 +72,10 @@ Spec::Runner.configure do |config|
     @timeline ||= mock(Youroom::UnreadTimeline)
   end
 
+  def room_timeline
+    @timeline ||= mock(Youroom::RoomTimeline)
+  end
+
   def create_entry_request
     @create_entry_request ||= mock(Youroom::PostEntry)
   end

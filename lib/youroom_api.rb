@@ -16,6 +16,7 @@ module Youroom
   # relation home
   autoload :HomeTimeline, 'youroom_api/request/timeline'
   autoload :UnreadTimeline, 'youroom_api/request/unread_timeline'
+  autoload :RoomTimeline, 'youroom_api/request/room_timeline'
   autoload :MyGroup, 'youroom_api/request/my_group'
 
   # relation entry

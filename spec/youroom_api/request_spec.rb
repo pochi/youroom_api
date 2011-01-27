@@ -1,3 +1,4 @@
+# encoding: utf-8
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 describe Youroom::Request do
@@ -48,6 +49,14 @@ describe Youroom::Request do
       Youroom::UnreadTimeline.should_receive(:new).and_return(unread_timeline)
       unread_timeline.should_receive(:get)
       Youroom::Request.new(access_token).get_unread_timeline
+    end
+  end
+
+  describe "#get_room_timeline" do
+    it "should get Youroom:RoomTimeline.new" do
+      Youroom::RoomTimeline.should_receive(:new).and_return(room_timeline)
+      room_timeline.should_receive(:get)
+      Youroom::Request.new(access_token).get_room_timeline("room_id")
     end
   end
 
