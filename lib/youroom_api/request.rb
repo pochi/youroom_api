@@ -24,7 +24,7 @@ module Youroom
       UnreadTimeline.new(access_token, url).get
     end
 
-    def get_room_timeline(room_id, params)
+    def get_room_timeline(room_id, params={ })
       RoomTimeline.new(access_token, room_id, params, url).get
     end
 
