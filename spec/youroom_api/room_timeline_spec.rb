@@ -2,7 +2,7 @@
 
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
-describe Youroom::RoomTimeline, :current => true do
+describe Youroom::RoomTimeline do
   describe "#path" do
     context "本家のURLを利用する場合" do
       before do

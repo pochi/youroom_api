@@ -13,6 +13,8 @@ module Youroom
   autoload :OAuth, 'youroom_api/youroom'
   autoload :Request, 'youroom_api/request'
 
+  autoload :VerifyCredencials, 'youroom_api/request/verify_credencials'
+
   # relation home
   autoload :HomeTimeline, 'youroom_api/request/timeline'
   autoload :UnreadTimeline, 'youroom_api/request/unread_timeline'
