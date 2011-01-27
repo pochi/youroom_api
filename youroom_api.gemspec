@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'youroom_api'
-  s.version = '0.0.8'
+  s.version = '0.0.9'
 
   s.authors = ['pochi']
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -31,6 +31,8 @@ Gem::Specification.new do |s|
              'spec/youroom_api/youroom_spec.rb',
              'spec/youroom_api/timeline_spec.rb',
              'lib/youroom_api/request/timeline.rb',
+             'spec/youroom_api/verify_credencials_spec.rb',
+             'lib/youroom_api/request/verify_credencials.rb',
              'spec/youroom_api/room_timeline_spec.rb',
              'lib/youroom_api/request/room_timeline.rb',
              'spec/youroom_api/unread_timeline_spec.rb',

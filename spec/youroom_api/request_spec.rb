@@ -19,12 +19,12 @@ describe Youroom::Request do
     end
   end
 
-  describe "#get_verify_credencials" do
-    it "should get VerifyCredencials.new" do
-      Youroom::VerifyCredencials.should_receive(:new).with(access_token, Youroom::BASE_URL).
-                                                      and_return(verify_credencials)
-      verify_credencials.should_receive(:get)
-      Youroom::Request.new(access_token).get_verify_credencials
+  describe "#get_verify_credentials" do
+    it "should get VerifyCredentials.new" do
+      Youroom::VerifyCredentials.should_receive(:new).with(access_token, Youroom::BASE_URL).
+                                                      and_return(verify_credentials)
+      verify_credentials.should_receive(:get)
+      Youroom::Request.new(access_token).get_verify_credentials
     end
   end
 

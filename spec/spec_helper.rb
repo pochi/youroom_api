@@ -61,8 +61,8 @@ RSpec.configure do |config|
     @entry ||= mock(Youroom::GetEntry)
   end
 
-  def verify_credencials
-    @verify_credencials ||= mock(Youroom::VerifyCredencials)
+  def verify_credentials
+    @verify_credentials ||= mock(Youroom::VerifyCredentials)
   end
 
   def participation

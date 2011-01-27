@@ -13,7 +13,7 @@ module Youroom
   autoload :OAuth, 'youroom_api/youroom'
   autoload :Request, 'youroom_api/request'
 
-  autoload :VerifyCredencials, 'youroom_api/request/verify_credencials'
+  autoload :VerifyCredentials, 'youroom_api/request/verify_credentials'
 
   # relation home
   autoload :HomeTimeline, 'youroom_api/request/timeline'
