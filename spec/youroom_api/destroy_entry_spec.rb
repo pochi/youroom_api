@@ -1,3 +1,4 @@
+# encoding: utf-8
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 describe Youroom::DestroyEntry do
@@ -11,14 +12,14 @@ describe Youroom::DestroyEntry do
       its(:access_token) { should == access_token }
     end
 
-    describe "when can't create instance" do
-      describe "case1: room_id is not either String or Symbol" do
-        it "should raise ArgumentError" do
-          lambda { Youroom::DestroyEntry.new(access_token, 100, 1111) }.should raise_exception(ArgumentError)
-        end
+    context "room_idにFixnumを指定した場合" do
+      it "例外が発生しないこと" do
+        lambda { Youroom::DestroyEntry.new(access_token, 100, 1111) }.should_not raise_exception
       end
+    end
 
-      describe "case2: mutter is not either String or Fixnum" do
+    describe "when can't create instance" do
+      describe "case1: mutter is not either String or Fixnum" do
         it "should raise ArgumentError" do
           lambda { Youroom::PostEntry.new(access_token, "room_id", [1111]) }.should raise_exception(ArgumentError)
         end
