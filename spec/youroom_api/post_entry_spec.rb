@@ -1,3 +1,4 @@
+# encoding: utf-8
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 describe Youroom::PostEntry do
@@ -11,17 +12,15 @@ describe Youroom::PostEntry do
       its(:access_token) { should == access_token }
     end
 
-    describe "when can't create instance" do
-      describe "case1: room_id is not either String or Symbol" do
-        it "should raise ArgumentError" do
-          lambda { Youroom::PostEntry.new(access_token, 100) }.should raise_exception(ArgumentError)
-        end
+    describe "room_idにFixunumオブジェクトが引数になった場合" do
+      it "例外が発生しないこと" do
+        lambda { Youroom::PostEntry.new(access_token, 100, "test") }.should_not raise_exception
       end
+    end
 
-      describe "case2: content is not either String" do
-        it "should raise ArgumentError" do
-          lambda { Youroom::PostEntry.new(access_token, "room_id", 14) }.should raise_exception(ArgumentError)
-        end
+    describe "contentにFixunumオブジェクトが引数になった場合" do
+      it "例外が発生しないこと" do
+        lambda { Youroom::PostEntry.new(access_token, 100, 1000) }.should_not raise_exception
       end
     end
   end

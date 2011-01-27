@@ -20,7 +20,7 @@ module Youroom
       UnreadTimeline.new(access_token, url).get
     end
 
-    def post_entry(room_id, content, parent_id=nil)
+    def create_entry(room_id, content, parent_id=nil)
       PostEntry.new(access_token, room_id, content, parent_id, url).post
     end
 

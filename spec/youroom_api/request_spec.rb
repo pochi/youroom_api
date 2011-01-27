@@ -51,11 +51,11 @@ describe Youroom::Request do
     end
   end
 
-  describe "#post_entry(room_id, content)" do
+  describe "#create_entry(room_id, content)" do
     it "should get Youroom:TimeLine.new" do
       Youroom::PostEntry.should_receive(:new).and_return(create_entry_request)
       create_entry_request.should_receive(:post)
-      Youroom::Request.new(access_token).post_entry("room_id", "hogehoge")
+      Youroom::Request.new(access_token).create_entry("room_id", "hogehoge")
     end
   end
 
