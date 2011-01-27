@@ -16,6 +16,10 @@ module Youroom
       VerifyCredentials.new(access_token, url).get
     end
 
+    def get_attachment(room_id, mutter_id)
+      ShowAttachment.new(access_token, room_id, mutter_id, url).get
+    end
+
     def get_all_timeline
       HomeTimeline.new(access_token, url).get
     end

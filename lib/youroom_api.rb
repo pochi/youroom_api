@@ -14,6 +14,7 @@ module Youroom
   autoload :Request, 'youroom_api/request'
 
   autoload :VerifyCredentials, 'youroom_api/request/verify_credentials'
+  autoload :ShowAttachment, 'youroom_api/request/show_attachment'
 
   # relation home
   autoload :HomeTimeline, 'youroom_api/request/timeline'

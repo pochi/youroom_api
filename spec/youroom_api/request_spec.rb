@@ -28,6 +28,15 @@ describe Youroom::Request do
     end
   end
 
+  describe "#get_attachment" do
+    it "should get ShowAttachment.new" do
+      Youroom::ShowAttachment.should_receive(:new).with(access_token, "room_id", "mutter_id", Youroom::BASE_URL).
+                                                  and_return(show_attachment)
+      show_attachment.should_receive(:get)
+      Youroom::Request.new(access_token).get_attachment("room_id", "mutter_id")
+    end
+  end
+
   describe "#get_entry(room_id, mutter_id)" do
     it "should get GetEntry.new" do
       Youroom::GetEntry.should_receive(:new).with(access_token, "room_id", "mutter_id", Youroom::BASE_URL).

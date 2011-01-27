@@ -65,6 +65,10 @@ RSpec.configure do |config|
     @verify_credentials ||= mock(Youroom::VerifyCredentials)
   end
 
+  def show_attachment
+    @show_attachment ||= mock(Youroom::ShowAttachment)
+  end
+
   def participation
     @participation ||= mock(Youroom::Participation)
   end
