@@ -56,7 +56,7 @@ describe Youroom::Request do
     it "should get Youroom:RoomTimeline.new" do
       Youroom::RoomTimeline.should_receive(:new).and_return(room_timeline)
       room_timeline.should_receive(:get)
-      Youroom::Request.new(access_token).get_room_timeline("room_id")
+      Youroom::Request.new(access_token).get_room_timeline("room_id", {})
     end
   end
 

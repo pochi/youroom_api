@@ -1,4 +1,5 @@
-$KCODE= 'u'
+# encoding: utf-8
+
 require 'rubygems'
 begin
   require 'spec'
@@ -16,7 +17,7 @@ require "youroom_api.rb"
 
 load File.expand_path("setup_test_model.rb", File.dirname(__FILE__))
 
-Spec::Runner.configure do |config|
+RSpec.configure do |config|
   WW_URL = "http://localhost:8083/youroom/"
 
   # ww config
