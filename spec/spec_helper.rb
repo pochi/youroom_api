@@ -1,6 +1,6 @@
 $KCODE= 'u'
 require 'rubygems'
-require 'spec'
+require 'rspec'
 require 'ww'
 require 'json'
 
@@ -12,7 +12,7 @@ require "youroom_api.rb"
 
 load File.expand_path("setup_test_model.rb", File.dirname(__FILE__))
 
-Spec::Runner.configure do |config|
+RSpec.configure do |config|
   WW_URL = "http://localhost:8083/youroom/"
 
   # ww config
@@ -102,6 +102,10 @@ Spec::Runner.configure do |config|
 
   def get_user_list_request
     @get_user_list_request ||= mock(Youroom::GetUserList)
+  end
+
+  def picture
+    @picture ||= mock(Youroom::Picture)
   end
 
   def user_params

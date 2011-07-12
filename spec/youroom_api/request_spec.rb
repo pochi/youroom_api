@@ -27,7 +27,7 @@ describe Youroom::Request do
     end
   end
 
-  describe "#destroy_entry(room_id, mutter_id" do
+  describe "#destroy_entry(room_id, mutter_id)" do
     it "should get DestroyEntry.new" do
       Youroom::DestroyEntry.should_receive(:new).and_return(destroy_entry)
       destroy_entry.should_receive(:delete)
@@ -120,6 +120,14 @@ describe Youroom::Request do
       Youroom::GetUserList.should_receive(:new).and_return(get_user_list_request)
       get_user_list_request.should_receive(:get)
       Youroom::Request.new(access_token).get_user_list("3")
+    end
+  end
+
+  describe "#get_picture(room_id, participation_id)" do
+    it "should get Picture.new" do
+      Youroom::Picture.should_receive(:new).and_return(picture)
+      picture.should_receive(:get)
+      Youroom::Request.new(access_token).get_picture("room_id", "participation_id")
     end
   end
 end

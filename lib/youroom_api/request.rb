@@ -60,6 +60,10 @@ module Youroom
       GetUserList.new(access_token, billing_id, url).get
     end
 
+    def get_picture(room_id, participation_id)
+      Picture.new(access_token, room_id, participation_id).get
+   end
+
     def get
       JSON.parse(access_token.get(path).body)
     end
