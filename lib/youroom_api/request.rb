@@ -61,11 +61,11 @@ module Youroom
     end
 
     def get_picture(room_id, participation_id)
-      Picture.new(access_token, room_id, participation_id).get
+      Picture.new(access_token, room_id, participation_id).get(false)
    end
 
-    def get
-      JSON.parse(access_token.get(path).body)
+    def get(parse=true)
+      parse ? JSON.parse(access_token.get(path).body) : access_token.get(path)
     rescue => e
       puts "[Error forward to] " + path
       puts "[Error access_token is]"
