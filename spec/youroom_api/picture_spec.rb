@@ -33,6 +33,6 @@ describe Youroom::Picture do
     end
 
     subject { @picture.path }
-    it { should == File.join(WW_URL, 'group', 'room_id', 'participations', 'participation_id', 'picture.image') }
+    it { should == File.join(WW_URL, 'r', 'room_id', 'participations', 'participation_id', 'picture.image') }
   end
 end

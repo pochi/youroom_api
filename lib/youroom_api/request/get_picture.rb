@@ -9,7 +9,7 @@ module Youroom
     end
 
     def path
-      File.join(url, "group", room_id, "participations", participation_id, "picture.image")
+      File.join(url, "r", room_id, "participations", participation_id, "picture.image")
     end
   end
 end
