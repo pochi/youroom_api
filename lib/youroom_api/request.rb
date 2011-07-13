@@ -20,8 +20,8 @@ module Youroom
       ShowAttachment.new(access_token, room_id, mutter_id, url).get
     end
 
-    def get_all_timeline
-      HomeTimeline.new(access_token, url).get
+    def get_all_timeline(params={ })
+      HomeTimeline.new(access_token, params, url).get
     end
 
     def get_unread_timeline
