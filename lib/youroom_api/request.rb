@@ -82,7 +82,7 @@ module Youroom
     end
 
     def get_picture(room_id, participation_id)
-      Picture.new(access_token, room_id, participation_id).get(false)
+      Picture.new(access_token, room_id, participation_id, url).get(false)
    end
 
     def get(parse=true)
