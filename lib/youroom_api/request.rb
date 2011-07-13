@@ -66,6 +66,11 @@ module Youroom
 
     def get
       JSON.parse(access_token.get(path).body)
+    rescue => e
+      puts "[Error forward to] " + path
+      puts "[Error access_token is]"
+      puts access_token.inspect
+      puts e.inspect
     end
 
     def post
