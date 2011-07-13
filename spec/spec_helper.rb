@@ -121,6 +121,10 @@ RSpec.configure do |config|
     @get_user_list_request ||= mock(Youroom::GetUserList)
   end
 
+  def picture
+    @picture ||= mock(Youroom::Picture)
+  end
+
   def user_params
     { :name => 'new user',
       :email => 'pochi.black@gmail.com',

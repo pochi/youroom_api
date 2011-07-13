@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'youroom_api'
-  s.version = '0.0.11'
+  s.version = '0.0.12'
 
   s.authors = ['pochi']
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -58,8 +58,9 @@ Gem::Specification.new do |s|
              'lib/youroom_api/request/add_participation.rb',
              'spec/youroom_api/add_participation_spec.rb',
              'lib/youroom_api/request/destroy_participation.rb',
-             'spec/youroom_api/destroy_participation_spec.rb']
-
+             'spec/youroom_api/destroy_participation_spec.rb',
+             'lib/youroom_api/request/get_picture.rb',
+             'spec/youroom_api/picture_spec.rb']
   s.homepage = "https://home.youroom.in/"
   s.rdoc_options = ["--title", "ww documentation", "--charset", "utf-8", "--opname", "index.html", "--line-numbers", "--main", "README.rdoc", "--inline-source", "--exclude", "^(examples|extras)/"]
   s.require_paths = ["lib"]

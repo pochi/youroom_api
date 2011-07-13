@@ -81,5 +81,25 @@ module Youroom
       GetUserList.new(access_token, billing_id, url).get
     end
 
+    def get_picture(room_id, participation_id)
+      Picture.new(access_token, room_id, participation_id).get(false)
+   end
+
+    def get(parse=true)
+      parse ? JSON.parse(access_token.get(path).body) : access_token.get(path)
+    rescue => e
+      puts "[Error forward to] " + path
+      puts "[Error access_token is]"
+      puts access_token.inspect
+      puts e.inspect
+    end
+
+    def post
+      JSON.parse(access_token.post(path, params).body)
+    end
+
+    def delete
+      JSON.parse(access_token.delete(path).body)
+    end
   end
 end

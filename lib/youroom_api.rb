@@ -40,5 +40,8 @@ module Youroom
   autoload :Participation, 'youroom_api/request/participation'
   autoload :AddParticipation, 'youroom_api/request/add_participation' # enterprise only
   autoload :DestroyParticipation, 'youroom_api/request/destroy_participation' # enterprise only
+
+  # for picture
+  autoload :Picture, 'youroom_api/request/get_picture'
 end
 
