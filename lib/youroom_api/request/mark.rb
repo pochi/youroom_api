@@ -15,7 +15,7 @@ module Youroom
     end
 
     def params
-      { :ids => ids.join(",") }
+      { 'ids[]' => ids.join(",") }
     end
   end
 end

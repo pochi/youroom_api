@@ -34,6 +34,6 @@ describe Youroom::MarkRead do
 
   context "#params" do
     subject { mark_read }
-    its(:params) { should == { :ids => '1,2,3' } }
+    its(:params) { should == { 'ids[]' => '1,2,3' } }
   end
 end
