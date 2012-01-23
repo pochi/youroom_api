@@ -149,5 +149,21 @@ describe Youroom::Request do
       Youroom::Request.new(access_token).get_picture("room_id", "participation_id")
     end
   end
+
+  describe "#mark_read(ids)" do
+    it "should post MarkRead.new" do
+      Youroom::MarkRead.should_receive(:new).and_return(mark_read)
+      mark_read.should_receive(:post)
+      Youroom::Request.new(access_token).mark_read([1,2,3])
+    end
+  end
+
+  describe "#mark_unread(ids)" do
+    it "should post MarkUnread.new" do
+      Youroom::MarkUnread.should_receive(:new).and_return(mark_unread)
+      mark_unread.should_receive(:post)
+      Youroom::Request.new(access_token).mark_unread([1,2,3])
+    end
+  end
 end
 

@@ -125,6 +125,14 @@ RSpec.configure do |config|
     @picture ||= mock(Youroom::Picture)
   end
 
+  def mark_read
+    @mark_read ||= mock(Youroom::MarkRead)
+  end
+
+  def mark_unread
+    @mark_unread ||= mock(Youroom::MarkUnread)
+  end
+
   def user_params
     { :name => 'new user',
       :email => 'pochi.black@gmail.com',

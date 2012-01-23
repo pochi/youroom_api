@@ -44,6 +44,14 @@ module Youroom
       MyGroup.new(access_token, url).get
     end
 
+    def mark_read(ids=[])
+      MarkRead.new(access_token, ids, url).post
+    end
+
+    def mark_unread(ids=[])
+      MarkUnread.new(access_token, ids, url).post
+    end
+
     def get
       JSON.parse(access_token.get(path).body)
     end
