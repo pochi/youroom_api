@@ -29,7 +29,7 @@ describe Youroom::MarkUnread do
 
   context "#path" do
     subject { mark_unread }
-    its(:path) { should == File.join(mark_unread.url, 'mark_unread') }
+    its(:path) { should == File.join(mark_unread.url, 'mark_unread?format=json') }
   end
 
   context "#params" do

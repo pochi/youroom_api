@@ -29,7 +29,7 @@ describe Youroom::MarkRead do
 
   context "#path" do
     subject { mark_read }
-    its(:path) { should == File.join(mark_read.url, 'mark_read') }
+    its(:path) { should == File.join(mark_read.url, 'mark_read?format=json') }
   end
 
   context "#params" do
