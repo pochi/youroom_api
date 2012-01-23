@@ -27,6 +27,9 @@ module Youroom
   autoload :GetEntry, 'youroom_api/request/get_entry'
   autoload :PostEntry, 'youroom_api/request/post_entry'
   autoload :DestroyEntry, 'youroom_api/request/destroy_entry'
+
+  # relation of read/unread
+  autoload :Mark, 'youroom_api/request/mark'
   autoload :MarkRead, 'youroom_api/request/mark_read'
   autoload :MarkUnread, 'youroom_api/request/mark_unread'
 

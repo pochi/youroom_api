@@ -1,9 +1,9 @@
 # coding: utf-8
 
 module Youroom
-  class MarkRead < Mark
+  class MarkUnread < Mark
     def path
-      File.join(url, 'mark_read')
+      File.join(url, 'unmark_read')
     end
   end
 end
