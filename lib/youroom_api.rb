@@ -27,6 +27,8 @@ module Youroom
   autoload :GetEntry, 'youroom_api/request/get_entry'
   autoload :PostEntry, 'youroom_api/request/post_entry'
   autoload :DestroyEntry, 'youroom_api/request/destroy_entry'
+  autoload :MarkRead, 'youroom_api/request/mark_read'
+  autoload :MarkUnread, 'youroom_api/request/mark_unread'
 
   # relation room
   autoload :AddRoom, 'youroom_api/request/add_room' # enterprise only
