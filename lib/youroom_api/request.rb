@@ -52,18 +52,6 @@ module Youroom
       MarkUnread.new(access_token, ids, url).post
     end
 
-    def get
-      JSON.parse(access_token.get(path).body)
-    end
-
-    def post
-      JSON.parse(access_token.post(path, params).body)
-    end
-
-    def delete
-      JSON.parse(access_token.delete(path).body)
-    end
-
     # enterprise api
     def create_room(billing_id, name)
       AddRoom.new(access_token, billing_id, name, url).post
