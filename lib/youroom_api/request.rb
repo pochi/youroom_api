@@ -77,7 +77,7 @@ module Youroom
       GetUserList.new(access_token, billing_id, url).get
     end
 
-    def get_picture(room_id, participation_id)
+    def get_picture(room_id, participation_id=nil)
       Picture.new(access_token, room_id, participation_id, url).get(false)
    end
 
